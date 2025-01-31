@@ -1,4 +1,4 @@
-import 'package:avicare/model/individual_dates_model.dart';
+import 'package:avicare/model/old/individual_dates_model.dart';
 
 List<IndividualDatesModel> individualDatesData = [
   IndividualDatesModel(

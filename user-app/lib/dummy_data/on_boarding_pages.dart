@@ -1,5 +1,5 @@
 // lib/data/onboarding_data.dart
-import 'package:avicare/model/on_boarding_content_model.dart';
+import 'package:avicare/model/old/on_boarding_content_model.dart';
 
 final List<OnboardingContentModel> onboardingPages = [
   OnboardingContentModel(

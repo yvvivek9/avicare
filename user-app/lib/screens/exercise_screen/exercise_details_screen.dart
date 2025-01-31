@@ -8,6 +8,8 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../widget/timeline_widget.dart';
 
+import 'package:avicare/model/exercise.dart';
+
 class ExerciseDetailsController extends GetxController {
   RxBool isExpanded = false.obs;
   RxInt maxLines = 3.obs;
@@ -30,8 +32,9 @@ class ExerciseDetailsController extends GetxController {
 }
 
 class ExerciseDetailsScreen extends StatelessWidget {
-  ExerciseDetailsScreen({super.key});
+  ExerciseDetailsScreen({super.key, required this.exercise});
 
+  final Exercise exercise;
   final ExerciseDetailsController controller =
       Get.put(ExerciseDetailsController());
 
@@ -46,7 +49,7 @@ class ExerciseDetailsScreen extends StatelessWidget {
               children: [
                 YoutubePlayer(
                   controller: YoutubePlayerController(
-                    initialVideoId: controller.videoId!,
+                    initialVideoId: YoutubePlayer.convertUrlToId(exercise.youtube)!,
                     flags: YoutubePlayerFlags(
                       autoPlay: false,
                       mute: false,
@@ -72,7 +75,8 @@ class ExerciseDetailsScreen extends StatelessWidget {
                 children: [
                   // Title and description
                   Text(
-                    "Power Jacks: Energize Your Body",
+                    exercise.name,
+                    // "Power Jacks: Energize Your Body",
                     style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -86,8 +90,9 @@ class ExerciseDetailsScreen extends StatelessWidget {
                   SizedBox(height: 8.h),
                   Obx(
                     () => Text(
-                      "'Jumping Jack Exercise' is your ultimate high-energy fitness program designed to elevate your heart rate, "
-                      "build stamina, and tone your body—all with the simplicity of a timeless workout move.",
+                      exercise.description,
+                      // "'Jumping Jack Exercise' is your ultimate high-energy fitness program designed to elevate your heart rate, "
+                      // "build stamina, and tone your body—all with the simplicity of a timeless workout move.",
                       style: TextStyle(fontSize: 14.sp, color: Colors.white),
                       maxLines: controller.maxLines.value,
                       overflow: TextOverflow.ellipsis,

@@ -1,5 +1,5 @@
 import 'package:avicare/constants/colors.dart';
-import 'package:avicare/model/individual_dates_model.dart';
+import 'package:avicare/model/old/individual_dates_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

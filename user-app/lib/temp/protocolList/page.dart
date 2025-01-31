@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import 'controller.dart';
+import 'widgets.dart';
 
 class ExerciseScreen extends StatelessWidget {
   ExerciseScreen({super.key});
@@ -82,22 +83,24 @@ class ExerciseScreen extends StatelessWidget {
                   labelColor: Colors.blue,
                   unselectedLabelColor: Colors.grey,
                   indicatorColor: Colors.blue,
-                  tabs: [
-                    Tab(text: 'All (98)'),
-                    Tab(text: 'ACL (10)'),
-                    Tab(text: 'PCL (10)'),
-                    Tab(text: 'Hip Rehab (8)'),
-                  ],
+                  tabs: controller.protocolsList.value.map((e) => Tab(text: "${e.name} (${e.exercises.length})")).toList(),
+                  // tabs: [
+                  //   Tab(text: 'All (98)'),
+                  //   Tab(text: 'ACL (10)'),
+                  //   Tab(text: 'PCL (10)'),
+                  //   Tab(text: 'Hip Rehab (8)'),
+                  // ],
                 ),
                 SizedBox(height: 20.h),
                 Expanded(
                   child: TabBarView(
-                    children: [
-                      _buildExerciseList(),
-                      _buildCategoryContent('ACL Exercises'),
-                      _buildCategoryContent('PCL Exercises'),
-                      _buildCategoryContent('Hip Rehab Exercises'),
-                    ],
+                    children: controller.protocolsList.value.map((e) => ExerciseList(exercises: e.exercises)).toList(),
+                    // children: [
+                    //   _buildExerciseList(),
+                    //   _buildCategoryContent('ACL Exercises'),
+                    //   _buildCategoryContent('PCL Exercises'),
+                    //   _buildCategoryContent('Hip Rehab Exercises'),
+                    // ],
                   ),
                 ),
               ],

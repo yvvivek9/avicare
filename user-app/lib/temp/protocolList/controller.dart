@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:avicare/utils/utils.dart';
-import 'model.dart';
+import 'package:avicare/model/protocols.dart';
 
 class ProtocolListController extends GetxController {
   final protocolsList = Rx<List<Protocol>>([]);

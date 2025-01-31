@@ -85,7 +85,7 @@ class DemoScreen extends StatelessWidget {
         ),
         'title': "Exercise 2"
       },
-      {'widget': ExerciseDetailsScreen(), 'title': "Exercise Details"},
+      // {'widget': ExerciseDetailsScreen(), 'title': "Exercise Details"},
       {'widget': BioFeedbackScreen(), 'title': "Bio Feedback"},
     ];
   }

@@ -19,7 +19,4 @@ class GetExerciseRequest(BaseModel):
 @router.post("/exercise/get")
 async def get_exercise_route(request: GetExerciseRequest) -> exercise.Exercise:
     result = await exercise.find_exercise_by_id(uid=request.exercise_id)
-    if result is exercise.Exercise:
-        return result
-    else:
-        raise HTTPException(status_code=404, detail="Specified exercise not found")
+    return result

@@ -23,7 +23,6 @@ class Protocol {
     
     final response = await httpPostRequest(route: "/user/protocol/list", body: {});
     final tempList = List.from(response);
-    safePrint(tempList);
 
     for (final temp in tempList) {
       final exeTempList = List.from(temp["exercises"]);
