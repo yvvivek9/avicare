@@ -16,13 +16,10 @@ class ProtocolListController extends GetxController {
 
   Future<void> fetchProtocolsList() async {
     try {
-      Get.context!.loaderOverlay.show();
       protocolsList.value = await Protocol.fetchProtocolList();
     } catch(e) {
       safePrint(e);
       Fluttertoast.showToast(msg: e.toString());
-    } finally {
-      Get.context!.loaderOverlay.hide();
     }
   }
 }

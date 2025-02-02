@@ -5,8 +5,10 @@ Widget generalOption({
   required String title,
   required IconData prefixIcon,
   Widget? switchWidget,
+  Function()? onTap,
 }) {
   return ListTile(
+    onTap: onTap,
     minTileHeight: 60.h,
     tileColor: Colors.white,
     shape: RoundedRectangleBorder(

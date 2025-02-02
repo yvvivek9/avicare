@@ -8,7 +8,7 @@ import 'dart:developer' as developer;
 import 'package:avicare/temp/auth/signIn/page.dart';
 
 const String apiKey = "fnw4ua8bdueu5vckkhg56jaq8xy9m8";
-const String domain = "http://34.47.250.183:5000";
+const String domain = "http://34.100.177.84:5000";
 
 Future<dynamic> httpPostRequest({
   required String route,

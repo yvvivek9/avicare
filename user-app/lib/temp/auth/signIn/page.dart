@@ -74,9 +74,7 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  Get.to(MainScreen());
-                },
+                onPressed: controller.handleEmailSigninIn,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   minimumSize: Size(double.infinity, 60.h),

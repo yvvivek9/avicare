@@ -13,7 +13,7 @@ VALID_API_KEYS = {os.getenv('API_KEY')}
 
 async def sign_jwt(user_id: str) -> str:
     payload = {
-        "user_id": "sample",
+        "user_id": user_id,
         "expires": time.time() + float(JWT_VALIDITY),
     }
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)

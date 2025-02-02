@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:avicare/temp/auth/signIn/page.dart';
 import 'package:avicare/utils/utils.dart';
 import 'package:avicare/model/user.dart';
 
@@ -17,13 +19,10 @@ class ProfilePageController extends GetxController {
 
   Future<void> fetchUserData() async {
     try {
-      Get.context!.loaderOverlay.show();
       final response = await httpPostRequest(route: "/user/details/get", body: {});
       user.value = User.fromJSON(response);
     } catch(e) {
       Fluttertoast.showToast(msg: e.toString());
-    } finally {
-      Get.context!.loaderOverlay.hide();
     }
   }
 
@@ -34,5 +33,11 @@ class ProfilePageController extends GetxController {
     final birthYear = int.parse(user.value.dob!.split("/").last);
 
     return (currentYear - birthYear).toString();
+  }
+
+  Future<void> handleLogout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("token");
+    Get.offAll(() => SignInScreen());
   }
 }

@@ -249,7 +249,15 @@ class ProfilePage extends StatelessWidget {
             generalOption(
               title: "Settings",
               prefixIcon: Icons.settings_outlined,
-            )
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            generalOption(
+              title: "Log out",
+              prefixIcon: Icons.logout,
+              onTap: controller.handleLogout,
+            ),
           ],
         ),
       ),
