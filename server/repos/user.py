@@ -5,24 +5,24 @@ COLLECTION_NAME = "users"
 class User(MongoDbBaseModel):
     name: str
     email: str
-    mobile: str | None
-    google_id: str | None
-    apple_id: str | None
-    gender: str | None
-    dob: str | None
-    weight: str | None
-    height: str | None
+    password: Optional[str] = None
+    google_id: Optional[str] = None
+    apple_id: Optional[str] = None
+    mobile: Optional[str] = None
+    gender: Optional[str] = None
+    dob: Optional[str] = None
+    weight: Optional[str] = None
+    height: Optional[str] = None
 
 
-async def find_user_by_id(uid: str) -> Optional[User]:
+async def find_user_by_query(query: dict) -> Optional[User]:
     db = await get_database()
     clc = db[COLLECTION_NAME]
-    query = {"_id": ObjectId(uid)}
+    # query = {"_id": ObjectId(uid)}
     res = clc.find_one(query)
     if res:
         return User(**res)
     return None
-
 
 async def list_user() -> List[User]:
     db = await get_database()

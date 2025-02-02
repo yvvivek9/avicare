@@ -9,19 +9,19 @@ JWT_ALGORITHM = os.getenv('JWT_ALGORITHM')
 JWT_VALIDITY = os.getenv('JWT_VALIDITY')  # in seconds
 
 
-async def sign_jwt() -> str:
+async def sign_jwt(user_id: str) -> str:
     payload = {
-        "content": "sample",
+        "user_id": "sample",
         "expires": time.time() + float(JWT_VALIDITY),
     }
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
 
 
-async def verify_jwt(security: HTTPAuthorizationCredentials = Depends(HTTPBearer(scheme_name='Bearer'))) -> bool:
+async def verify_jwt(security: HTTPAuthorizationCredentials = Depends(HTTPBearer(scheme_name='Bearer'))) -> str:
     try:
         decoded = jwt.decode(security.credentials, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         if decoded["expires"] >= time.time():
-            return True
+            return decoded["user_id"]
         else:
             raise HTTPException(status_code=401, detail="Authorization expired")
     except Exception as e:

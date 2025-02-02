@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.black,
         ),
         debugShowCheckedModeBanner: false,
-        home: MainScreen(),
+        home: OnboardingScreen1(),
         // home: MainScreen(),
         // home: SplashScreen(),
       ),
