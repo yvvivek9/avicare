@@ -1,29 +1,13 @@
-import 'package:avicare/screens/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-import '../widget/build_text_field.dart';
-
-class SignupController extends GetxController {
-  final fullNameController = TextEditingController();
-  final phoneController = TextEditingController();
-  final emailController = TextEditingController();
-  final isChecked = false.obs;
-  final selectedCountry = Country(
-    phoneCode: '91',
-    countryCode: 'IN',
-    e164Sc: 0,
-    geographic: true,
-    level: 1,
-    name: 'India',
-    example: 'India',
-    displayName: 'India',
-    displayNameNoCountryCode: 'IN',
-    e164Key: '',
-  ).obs;
-}
+import 'package:avicare/temp/auth/signIn/page.dart';
+import 'package:avicare/constants/colors.dart';
+import 'package:avicare/screens/widget/build_text_field.dart';
+import 'controller.dart';
 
 class SignupScreen extends StatelessWidget {
   final controller = Get.put(SignupController());
@@ -41,7 +25,7 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 60.h),
+                SizedBox(height: 10.h),
                 Text(
                   'Sign up',
                   style: TextStyle(
@@ -137,6 +121,14 @@ class SignupScreen extends StatelessWidget {
                   prefixIcon: Icons.mail_outline,
                 ),
                 SizedBox(height: 16.h),
+                BuildTextField(
+                  controller: controller.passwordController,
+                  label: 'Password',
+                  hint: '************',
+                  prefixIcon: Icons.lock,
+                  isPassword: true,
+                ),
+                SizedBox(height: 16.h),
                 Row(
                   children: [
                     Obx(() => Checkbox(
@@ -178,7 +170,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Get.to(() => RegisterScreen());
+
                     },
                     child: Text(
                       'Create Account',
@@ -213,19 +205,29 @@ class SignupScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 24.h),
-                Center(
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Already have an account? ',
-                      style: TextStyle(color: Colors.white, fontSize: 14.sp),
-                      children: [
-                        TextSpan(
-                          text: 'Login',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account? ",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12.sp,
+                      ),
                     ),
-                  ),
+                    ZoomTapAnimation(
+                      onTap: () {
+                        Get.offAll(() => SignInScreen());
+                      },
+                      child: Text(
+                        " Login",
+                        style: TextStyle(
+                          color: AppColors.blue,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

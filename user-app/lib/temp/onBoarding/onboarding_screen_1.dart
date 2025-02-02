@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../widget/bottom_sheet_button.dart';
+import '../../../screens/widget/bottom_sheet_button.dart';
 import 'onboarding_screen_2.dart';
 
 class OnboardingScreen1 extends StatelessWidget {

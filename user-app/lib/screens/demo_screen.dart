@@ -13,12 +13,7 @@ import 'extra_screens/end_screen.dart';
 import 'extra_screens/end_screen_2.dart';
 import 'extra_screens/error_screen.dart';
 import 'extra_screens/error_screen_2.dart';
-import 'extra_screens/onboarding_screen_1.dart';
-import 'extra_screens/onboarding_screen_2.dart';
-import 'extra_screens/onboarding_screen_3.dart';
 import 'exercise_screen/exercise_screen.dart';
-import 'auth/register_screen.dart';
-import 'auth/signup_screen.dart';
 import 'extra_screens/access_page.dart';
 import 'extra_screens/workout_completed_screen.dart';
 import 'statistics_user_list.dart';
@@ -69,14 +64,14 @@ class DemoScreen extends StatelessWidget {
       {'widget': ErrorScreen2(), 'title': "Error Screen 2"},
       {'widget': EndScreen(), 'title': "End Screen"},
       {'widget': EndScreen2(), 'title': "End Screen 2"},
-      {'widget': OnboardingScreen1(), 'title': "Onboarding 1"},
-      {'widget': OnboardingScreen2(), 'title': "Onboarding 2"},
-      {'widget': OnboardingScreen3(), 'title': "Onboarding 3"},
+      // {'widget': OnboardingScreen1(), 'title': "Onboarding 1"},
+      // {'widget': OnboardingScreen2(), 'title': "Onboarding 2"},
+      // {'widget': OnboardingScreen3(), 'title': "Onboarding 3"},
       {'widget': StatisticsUserList(), 'title': "Statistics"},
-      {'widget': SignupScreen(), 'title': "Signup"},
+      // {'widget': SignupScreen(), 'title': "Signup"},
       {'widget': StatisticsScreen(), 'title': "Statistics screen"},
       {'widget': StatisticsScreen2(), 'title': "Statistics screen 2"},
-      {'widget': RegisterScreen(), 'title': "Register"},
+      // {'widget': RegisterScreen(), 'title': "Register"},
       {'widget': ExerciseScreen(), 'title': "Exercise"},
       {
         'widget': ExerciseScreen2(

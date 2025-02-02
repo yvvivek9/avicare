@@ -10,14 +10,14 @@ from config.auth import sign_jwt, verify_jwt
 router = APIRouter()
 
 
-class SigninEmailRequest(BaseModel):
+class SignUpEmailRequest(BaseModel):
     name: str
     email: str
     mobile: str
     password: str
 
-@router.post("/signin/email")
-async def signin_via_email_route(request: SigninEmailRequest) -> LoginResponse:
+@router.post("/signup/email")
+async def signup_via_email_route(request: SignUpEmailRequest) -> LoginResponse:
     check = await user.find_user_by_query({"email": request.email})
     if check is not None:
         raise HTTPException(status_code=400, detail="Email already exists")

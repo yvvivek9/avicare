@@ -1,12 +1,12 @@
 import 'package:avicare/constants/colors.dart';
-import 'package:avicare/screens/auth/sign_in_screen.dart';
-import 'package:avicare/screens/auth/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../widget/bottom_sheet_button.dart';
-import '../widget/bottom_sheet_icon_button.dart';
+import 'package:avicare/temp/auth/signIn/page.dart';
+import 'package:avicare/temp/auth/signUp/page.dart';
+import '../../../screens/widget/bottom_sheet_button.dart';
+import '../../../screens/widget/bottom_sheet_icon_button.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   const OnboardingScreen3({super.key});
@@ -75,7 +75,7 @@ class OnboardingScreen3 extends StatelessWidget {
             Expanded(
               child: bottomSheetIconButton(
                 onTap: () {
-                  Get.to(() => SignInScreen());
+                  Get.offAll(() => SignInScreen());
                 },
                 text: 'SignIn',
               ),
@@ -86,7 +86,7 @@ class OnboardingScreen3 extends StatelessWidget {
             Expanded(
               child: bottomSheetIconButton(
                 onTap: () {
-                  Get.to(() => SignupScreen());
+                  Get.offAll(() => SignupScreen());
                 },
                 text: 'SignUp',
                 color: AppColors.blue,

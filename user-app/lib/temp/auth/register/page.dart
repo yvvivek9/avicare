@@ -1,14 +1,15 @@
-import 'package:avicare/screens/home_page/home_screen_2.dart';
 import 'package:avicare/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../controller/profile_controller..dart';
-import '../widget/build_text_field.dart';
-import '../widget/fancy_dropdown.dart';
+import '../../../controller/profile_controller..dart';
+import 'package:avicare/screens/widget/build_text_field.dart';
+import 'package:avicare/screens/widget/fancy_dropdown.dart';
 
 class RegisterScreen extends StatelessWidget {
+  RegisterScreen({super.key});
+
   final controller = Get.put<ProfileController>(ProfileController());
 
   @override

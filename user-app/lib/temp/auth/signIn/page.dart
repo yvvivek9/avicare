@@ -1,5 +1,4 @@
 import 'package:avicare/constants/colors.dart';
-import 'package:avicare/screens/auth/register_screen.dart';
 import 'package:avicare/screens/main_screen/main_screen.dart';
 import 'package:avicare/screens/widget/build_text_field.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-import 'signup_screen.dart';
+import 'package:avicare/temp/auth/signUp/page.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -159,7 +158,6 @@ class SignInScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(() => SignupScreen());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -201,8 +199,7 @@ class SignInScreen extends StatelessWidget {
                     ),
                     ZoomTapAnimation(
                       onTap: () {
-                        Get.to(() => RegisterScreen());
-                        print("Create Account");
+                        Get.offAll(() => SignupScreen());
                       },
                       child: Text(
                         " Create Account",
