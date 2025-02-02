@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+import 'package:avicare/temp/homePage/page.dart';
 
 class WorkoutCompletionScreen extends StatelessWidget {
   final int duration;
@@ -146,7 +147,9 @@ class WorkoutCompletionScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.r),
               ),
             ),
-            onPressed: () => Get.back(),
+            onPressed: () {
+              Get.offAll(() => MainScreen());
+            },
             child: Text(
               'Back to home',
               style: TextStyle(

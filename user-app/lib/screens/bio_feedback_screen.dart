@@ -1,6 +1,6 @@
 import 'package:avicare/controller/arrow_animation_controller.dart';
 import 'package:avicare/screens/widget/animated_arrows.dart';
-import 'package:avicare/screens/widget/bottom_sheet_button.dart';
+import 'package:avicare/screens/extra_screens/workout_completed_screen.dart';
 import 'package:avicare/screens/widget/form_hint_widget.dart';
 import 'package:avicare/screens/widget/icon_button.dart';
 import 'package:camera/camera.dart';
@@ -17,11 +17,9 @@ class BioFeedbackScreen extends StatelessWidget {
 
   final controller = Get.put(BioFeedbackController());
   final leftArrowController = Get.put(ArrowAnimationController(), tag: "left");
-  final rightArrowController =
-      Get.put(ArrowAnimationController(), tag: "right");
+  final rightArrowController = Get.put(ArrowAnimationController(), tag: "right");
   final topArrowController = Get.put(ArrowAnimationController(), tag: "top");
-  final bottomArrowController =
-      Get.put(ArrowAnimationController(), tag: "bottom");
+  final bottomArrowController = Get.put(ArrowAnimationController(), tag: "bottom");
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +69,7 @@ class BioFeedbackScreen extends StatelessWidget {
                           right: 16.w,
                           child: ZoomTapAnimation(
                             onTap: () {
-                              controller.isMenuOpen.value =
-                                  !controller.isMenuOpen.value;
+                              controller.isMenuOpen.value = !controller.isMenuOpen.value;
                             },
                             child: Container(
                               margin: EdgeInsets.only(left: 10.w),
@@ -116,20 +113,14 @@ class BioFeedbackScreen extends StatelessWidget {
                         Positioned(
                           top: 398.h,
                           left: 11.w,
-                          child:
-                              _buildInfoBox('Reps', controller.leftReps.value),
+                          child: _buildInfoBox('Reps', controller.leftReps.value),
                         ),
                         Positioned(
                           top: 476.h,
                           left: 11.w,
-                          child: _buildInfoBox2(
-                              'Hold\nTime', '${controller.leftHoldTime}s'),
+                          child: _buildInfoBox2('Hold\nTime', '${controller.leftHoldTime}s'),
                         ),
-                        Positioned(
-                            top: 321.h,
-                            left: 11.w,
-                            child: _buildDegreeSelector(
-                                controller.leftCurrentDegree.value)),
+                        Positioned(top: 321.h, left: 11.w, child: _buildDegreeSelector(controller.leftCurrentDegree.value)),
                         Positioned(
                           top: 307.h,
                           right: 0,
@@ -155,14 +146,12 @@ class BioFeedbackScreen extends StatelessWidget {
                         Positioned(
                           top: 398.h,
                           right: 11.w,
-                          child:
-                              _buildInfoBox('Reps', controller.rightReps.value),
+                          child: _buildInfoBox('Reps', controller.rightReps.value),
                         ),
                         Positioned(
                           top: 476.h,
                           right: 11.w,
-                          child: _buildInfoBox2(
-                              'Hold\nTime', '${controller.rightHoldTime}s'),
+                          child: _buildInfoBox2('Hold\nTime', '${controller.rightHoldTime}s'),
                         ),
                         Positioned(
                           top: 321.h,
@@ -234,97 +223,21 @@ class BioFeedbackScreen extends StatelessWidget {
                         Positioned(
                           left: 11.w,
                           bottom: 135.h,
-                          child: FormHintWidget(
-                              text:
-                                  "Adjust your form: lower your hips slightly."),
+                          child: FormHintWidget(text: "Adjust your form: lower your hips slightly."),
                         ),
                         Positioned(
-                          bottom: 50.h,
-                          left: 18.w,
-                          child: InkWell(
-                            onTap: () {
-                              leftArrowController
-                                  .startAnimation(ArrowDirection.left);
-                            },
-                            child: ClipOval(
-                              child: Container(
-                                height: 30.h,
-                                width: 107.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                ),
-                              ),
+                          bottom: 10.h,
+                          right: 10.w,
+                          child: IconButton(
+                            onPressed: controller.changeCamera,
+                            enableFeedback: true,
+                            style: IconButton.styleFrom(
+                              backgroundColor: Colors.black.withAlpha(150),
+                              foregroundColor: Colors.white,
+                              padding: EdgeInsets.all(15),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 50.h,
-                          right: 18.w,
-                          child: InkWell(
-                            onTap: () {
-                              rightArrowController
-                                  .startAnimation(ArrowDirection.right);
-                            },
-                            child: ClipOval(
-                              child: Container(
-                                height: 30.h,
-                                width: 107.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.withValues(alpha: 0.3),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 50.h,
-                          right: 135.w,
-                          child: ClipOval(
-                            child: Container(
-                              height: 30.h,
-                              width: 107.w,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withValues(alpha: 0.3),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 8.h,
-                          right: 135.w,
-                          child: InkWell(
-                            onTap: () {
-                              bottomArrowController
-                                  .startAnimation(ArrowDirection.down);
-                            },
-                            child: ClipOval(
-                              child: Container(
-                                height: 30.h,
-                                width: 107.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.withValues(alpha: 0.3),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 92.h,
-                          right: 135.w,
-                          child: InkWell(
-                            onTap: () {
-                              topArrowController
-                                  .startAnimation(ArrowDirection.up);
-                            },
-                            child: ClipOval(
-                              child: Container(
-                                height: 30.h,
-                                width: 107.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.withValues(alpha: 0.3),
-                                ),
-                              ),
-                            ),
+                            icon: Icon(Icons.camera_rear, size: 30.h),
                           ),
                         ),
                       ],
@@ -602,8 +515,7 @@ class BioFeedbackScreen extends StatelessWidget {
           ),
         ),
         menuButton(label: "Profile", icon: Icons.person, onTap: () {}),
-        menuButton(
-            label: "Band Health", icon: Icons.health_and_safety, onTap: () {}),
+        menuButton(label: "Band Health", icon: Icons.health_and_safety, onTap: () {}),
         menuButton(
           label: "Band Colours",
           icon: Icons.color_lens,
@@ -623,7 +535,9 @@ class BioFeedbackScreen extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => WorkoutCompletionScreen(duration: 30, reps: 47));
+            },
             child: Text(
               "Finish Workout",
               style: TextStyle(
@@ -707,6 +621,5 @@ class TimerPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(TimerPainter oldDelegate) =>
-      progress != oldDelegate.progress;
+  bool shouldRepaint(TimerPainter oldDelegate) => progress != oldDelegate.progress;
 }

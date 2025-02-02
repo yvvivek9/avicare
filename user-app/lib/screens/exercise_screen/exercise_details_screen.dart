@@ -8,6 +8,7 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../widget/timeline_widget.dart';
 
+import '../bio_feedback_screen.dart';
 import 'package:avicare/model/exercise.dart';
 
 class ExerciseDetailsController extends GetxController {
@@ -184,7 +185,9 @@ class ExerciseDetailsScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 32.h),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => BioFeedbackScreen());
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(

@@ -190,6 +190,7 @@ class RegisterScreen extends StatelessWidget {
               hint: 'Please enter ${label.toLowerCase()}',
               keyboardType: TextInputType.number,
               radius: 20,
+              onChanged: onValueChanged,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter ${label.toLowerCase()}';

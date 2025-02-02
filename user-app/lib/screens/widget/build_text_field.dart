@@ -12,6 +12,7 @@ class BuildTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final int? maxLength;
   final String? Function(String?)? validator;
+  final Function(String)? onChanged;
   final bool isPassword;
   final int? radius;
   final TextFieldController _textFieldController = TextFieldController();
@@ -27,6 +28,7 @@ class BuildTextField extends StatelessWidget {
     this.keyboardType,
     this.maxLength,
     this.validator,
+    this.onChanged,
     this.isPassword = false,
   }) : super(key: key) {
     // Initialize the obscured state based on isPassword
@@ -63,6 +65,7 @@ class BuildTextField extends StatelessWidget {
               }
               return validator!(value);
             },
+            onChanged: onChanged,
             style: TextStyle(
               fontSize: 14.sp,
               color: Colors.black,

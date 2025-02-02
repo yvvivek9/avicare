@@ -33,16 +33,28 @@ Future<dynamic> httpPostRequest({
     if (response.statusCode == successCode) {
       return decodedResponse;
     } else if (response.statusCode == 400) {
-      throw Exception(decodedResponse["detail"]);
+      throw CustomException(decodedResponse["detail"]);
     } else if (response.statusCode == 401) {
       await prefs.remove("token");
       Get.offAll(() => SignInScreen());
-      throw Exception("Session expired! Please login again.");
+      throw CustomException("Session expired! Please login again.");
     } else {
-      throw Exception("Unexpected error occurred!. Please try again");
+      throw CustomException("Unexpected error occurred!. Please try again");
     }
+  } on CustomException catch (e) {
+    rethrow;
   } catch (e) {
     safePrint(e);
-    throw Exception("Unexpected error occurred!. Please try again");
+    throw CustomException("Unexpected error occurred!. Please try again");
+  }
+}
+
+class CustomException {
+  CustomException(this.message);
+  final String message;
+
+  @override
+  String toString() {
+    return message;
   }
 }

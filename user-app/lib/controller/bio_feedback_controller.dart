@@ -43,6 +43,18 @@ class BioFeedbackController extends GetxController {
       print("No cameras available");
     }
   }
+  
+  Future<void> changeCamera() async {
+    final cameras = await availableCameras();
+    for (final c in cameras) {
+      if (c.lensDirection != cameraController.description.lensDirection) {
+        cameraController = CameraController(c, ResolutionPreset.high);
+        await cameraController.initialize();
+        isCameraInitialized.refresh();
+        break;
+      }
+    }
+  }
 
   Future<bool> requestCameraPermission() async {
     var status = await Permission.camera.request();

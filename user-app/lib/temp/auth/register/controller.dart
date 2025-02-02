@@ -12,8 +12,8 @@ class ProfileController extends GetxController {
   final userType = Rxn<String>();
   final gender = Rxn<String>();
   final birthDate = Rxn<DateTime>();
-  final weight = Rxn<double>();
-  final height = Rxn<double>();
+  final weight = Rxn<String>();
+  final height = Rxn<String>();
   final weightUnit = RxString('kgs');
   final heightUnit = RxString('cm');
   RxBool isPopupActive = false.obs;
@@ -24,9 +24,9 @@ class ProfileController extends GetxController {
 
   void setBirthDate(DateTime? value) => birthDate.value = value;
 
-  void setWeight(String value) => weight.value = double.tryParse(value);
+  void setWeight(String value) => weight.value = value;
 
-  void setHeight(String value) => height.value = double.tryParse(value);
+  void setHeight(String value) => height.value = value;
 
   void toggleWeightUnit(String unit) => weightUnit.value = unit;
 
@@ -47,7 +47,7 @@ class ProfileController extends GetxController {
       user.height = "${height.value} ${heightUnit.value}";
 
       final response2 = await httpPostRequest(route: "/user/details/update", body: user.toJSON());
-      Get.offAll(MainScreen());
+      Get.offAll(() => MainScreen());
     } catch(e) {
       Fluttertoast.showToast(msg: "Unexpected error occurred, please try again!");
     } finally {
@@ -72,7 +72,15 @@ class ProfileController extends GetxController {
       Fluttertoast.showToast(msg: "Enter valid weight");
       return false;
     }
+    if (!decimalRegex.hasMatch(weight.value!)) {
+      Fluttertoast.showToast(msg: "Enter valid weight");
+      return false;
+    }
     if (height.value == null) {
+      Fluttertoast.showToast(msg: "Enter valid height");
+      return false;
+    }
+    if (!decimalRegex.hasMatch(height.value!)) {
       Fluttertoast.showToast(msg: "Enter valid height");
       return false;
     }
