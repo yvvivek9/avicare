@@ -1,6 +1,6 @@
 import 'package:avicare/constants/colors.dart';
 import 'package:avicare/screens/demo_screen.dart';
-import 'package:avicare/screens/home_page/widget/battery_indicator.dart';
+import 'battery_indicator.dart';
 import 'package:avicare/screens/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

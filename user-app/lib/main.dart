@@ -1,12 +1,12 @@
-import 'package:avicare/temp/auth/signIn/page.dart';
-import 'package:avicare/temp/onBoarding/onboarding_screen_1.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'screens/main_screen/main_screen.dart';
+import 'package:avicare/temp/onBoarding/onboarding_screen_1.dart';
+import 'package:avicare/temp/homePage/page.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -32,21 +32,32 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) => GetMaterialApp(
-        themeMode: ThemeMode.dark,
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          textTheme: ThemeData.light().textTheme.apply(
-                bodyColor: Colors.white,
-                displayColor: Colors.white,
-                decorationColor: Colors.white,
-              ),
-          primaryColor: Colors.white,
-          scaffoldBackgroundColor: Colors.black,
+      builder: (context, child) => GlobalLoaderOverlay(
+        overlayColor: Colors.black.withAlpha(150),
+        overlayWidgetBuilder: (_) {
+          return Center(
+            child: SpinKitSpinningLines(
+              color: Colors.white,
+              lineWidth: 3.0,
+            ),
+          );
+        },
+        child: GetMaterialApp(
+          themeMode: ThemeMode.dark,
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+            textTheme: ThemeData.light().textTheme.apply(
+                  bodyColor: Colors.white,
+                  displayColor: Colors.white,
+                  decorationColor: Colors.white,
+                ),
+            primaryColor: Colors.white,
+            scaffoldBackgroundColor: Colors.black,
+          ),
+          debugShowCheckedModeBanner: false,
+          home: userSession ? MainScreen() : OnboardingScreen1(),
+          // home: MainScreen(),
         ),
-        debugShowCheckedModeBanner: false,
-        home: userSession ? MainScreen() : OnboardingScreen1(),
-        // home: MainScreen(),
       ),
     );
   }

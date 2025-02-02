@@ -1,8 +1,15 @@
 // Modify your CustomBottomNavBar to handle navigation
-import 'package:avicare/controller/navigation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+class NavigationController extends GetxController {
+  var selectedIndex = 0.obs;
+
+  void changeIndex(int index) {
+    selectedIndex.value = index;
+  }
+}
 
 class CustomBottomNavBar extends StatelessWidget {
   final NavigationController controller;

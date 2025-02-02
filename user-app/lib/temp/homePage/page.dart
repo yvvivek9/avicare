@@ -1,17 +1,12 @@
-import 'package:avicare/controller/navigation_controller.dart';
-import 'package:avicare/screens/exercise_screen/exercise_screen_2.dart';
-import 'package:avicare/screens/home_page/home_screen.dart';
-import 'package:avicare/screens/main_screen/widget/bottom_navigation_bar.dart';
-import 'package:avicare/screens/workout_page.dart';
-import 'package:avicare/screens/statistics_screens/statistics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-// import '../exercise_screen/exercise_screen.dart';
-import 'package:avicare/temp/protocolList/page.dart';
-import '../home_page/home_screen_2.dart';
-import '../profile_screen/profile_page.dart';
+import 'package:avicare/screens/statistics_screens/statistics_screen.dart';
+import 'firstPage/page.dart';
+import 'secondPage/page.dart';
+import 'profilePage/page.dart';
+import 'navBar.dart';
 
 class MainScreen extends StatelessWidget {
   final NavigationController controller = Get.put(NavigationController());

@@ -1,20 +1,20 @@
 import 'package:avicare/constants/colors.dart';
-import 'package:avicare/screens/profile_screen/widget/general_option.dart';
-import 'package:avicare/screens/profile_screen/widget/stats_icon.dart';
+import 'widget/general_option.dart';
+import 'widget/stats_icon.dart';
 import 'package:avicare/screens/widget/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-import '../../controller/profile_controller..dart';
-import '../demo_screen.dart';
-import '../widget/build_image.dart';
+import 'controller.dart';
+import 'package:avicare/screens/demo_screen.dart';
+import 'package:avicare/screens/widget/build_image.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
-  final profileController = Get.put(ProfileController());
+  final controller = Get.put(ProfilePageController());
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +97,11 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(
                   width: 10.w,
                 ),
-                Column(
+                Obx(() => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Rohini Dighe",
+                      controller.user.value.name,
                       style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
@@ -111,14 +111,14 @@ class ProfilePage extends StatelessWidget {
                       height: 5.h,
                     ),
                     Text(
-                      "Washington DC, USA",
+                      controller.user.value.gender ?? " -- ",
                       style: TextStyle(
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w400,
                           color: Colors.white),
                     ),
                   ],
-                ),
+                )),
               ],
             ),
             SizedBox(
@@ -171,26 +171,26 @@ class ProfilePage extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            Row(
+            Obx(() => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 statsIcon(
                   subTitle: "Height",
-                  title: "180 cm",
+                  title: controller.user.value.height ?? " -- ",
                   color: AppColors.lightPeach,
                 ),
                 statsIcon(
                   subTitle: "Weight",
-                  title: "70 kg",
+                  title: controller.user.value.weight ?? " -- ",
                   color: AppColors.lightBlue,
                 ),
                 statsIcon(
                   subTitle: "Age",
-                  title: "25 yo",
+                  title: controller.calculateAge(),
                   color: AppColors.purple,
                 ),
               ],
-            ),
+            )),
             SizedBox(
               height: 35.h,
             ),
@@ -217,9 +217,9 @@ class ProfilePage extends StatelessWidget {
                   child: FittedBox(
                     fit: BoxFit.fill,
                     child: Switch(
-                      value: profileController.isPopupActive.value,
+                      value: controller.isPopupActive.value,
                       onChanged: (value) {
-                        profileController.isPopupActive.value = value;
+                        controller.isPopupActive.value = value;
                       },
                       activeColor: AppColors.purple,
                     ),

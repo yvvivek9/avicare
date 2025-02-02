@@ -1,7 +1,7 @@
 import 'package:avicare/dummy_data/individual_dates_data.dart';
-import 'package:avicare/screens/home_page/widget/battery_indicator.dart';
-import 'package:avicare/screens/home_page/widget/intro_card.dart';
-import 'package:avicare/screens/home_page/widget/protocols.dart';
+import 'widget/battery_indicator.dart';
+import 'widget/intro_card.dart';
+import 'widget/protocols.dart';
 import 'package:avicare/screens/widget/build_image.dart';
 import 'package:avicare/screens/widget/individual_dates.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-import '../../constants/colors.dart';
-import '../notification/notification_screen.dart';
+import '../../../constants/colors.dart';
+import '../../../screens/notification/notification_screen.dart';
 
 class HomeScreen2 extends StatelessWidget {
   const HomeScreen2({super.key});

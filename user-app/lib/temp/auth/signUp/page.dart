@@ -169,9 +169,7 @@ class SignupScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(25.r),
                       ),
                     ),
-                    onPressed: () {
-
-                    },
+                    onPressed: controller.handleSignUp,
                     child: Text(
                       'Create Account',
                       style: TextStyle(

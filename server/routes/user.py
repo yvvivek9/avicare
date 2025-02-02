@@ -6,6 +6,7 @@ from bson.objectid import ObjectId
 import repos.user as user
 from utils.response import LoginResponse, CustomResponse
 from config.auth import sign_jwt, verify_jwt
+from utils.hashing import hash_pswd, check_pswd
 
 router = APIRouter()
 
@@ -25,7 +26,7 @@ async def signup_via_email_route(request: SignUpEmailRequest) -> LoginResponse:
         name=request.name,
         email=request.email,
         mobile=request.mobile,
-        password=request.password,
+        password=hash_pswd(request.password),
     ))
     new = await user.find_user_by_query({"email": request.email})
     return LoginResponse(token=await sign_jwt(user_id=new.id))
@@ -37,7 +38,7 @@ class LoginEmailRequest(BaseModel):
 @router.post("/login/email")
 async def login_via_email_route(request: LoginEmailRequest) -> LoginResponse:
     result = await user.find_user_by_query({"email": request.email})
-    if result.password == request.password:
+    if result and check_pswd(hashed=result.password, original=request.password):
         return LoginResponse(token=await sign_jwt(user_id=result.id))
     else:
         raise HTTPException(status_code=400, detail="Invalid credentials")
@@ -49,16 +50,22 @@ class LoginGoogleRequest(BaseModel):
 
 @router.post("/login/google")
 async def login_via_google_route(request: LoginGoogleRequest) -> LoginResponse:
-    result = await user.find_user_by_query({"google_id": request.google_id})
-    if result is None:
-        await user.insert_user(user.User(
-            name=request.name,
-            email=request.email,
-            google_id=request.google_id,
-        ))
-        result = await user.find_user_by_query({"google_id": request.google_id})
+    google_check = await user.find_user_by_query({"google_id": request.google_id})
+    if google_check is None:
+        email_check = await user.find_user_by_query({"email": request.email})
+        if email_check is None:
+            await user.insert_user(user.User(
+                name=request.name,
+                email=request.email,
+                google_id=request.google_id,
+            ))
+            google_check = await user.find_user_by_query({"google_id": request.google_id})
+        else:
+            google_check = email_check
+            google_check.google_id = request.google_id
+            await user.update_user(google_check.id, google_check)
 
-    return LoginResponse(token= await sign_jwt(user_id=result.id))
+    return LoginResponse(token= await sign_jwt(user_id=google_check.id))
 
 @router.post("/details/get")
 async def get_user_details_route(uid: str = Depends(verify_jwt)) -> user.User:

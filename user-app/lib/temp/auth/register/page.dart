@@ -1,11 +1,12 @@
-import 'package:avicare/screens/main_screen/main_screen.dart';
+import 'package:avicare/temp/homePage/page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../controller/profile_controller..dart';
 import 'package:avicare/screens/widget/build_text_field.dart';
 import 'package:avicare/screens/widget/fancy_dropdown.dart';
+
+import 'controller.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -19,7 +20,7 @@ class RegisterScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-          child: Container(
+          child: SizedBox(
             width: 340.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,10 +80,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
                 ElevatedButton(
-                  onPressed: () {
-                    // Handle profile creation
-                    Get.to(() => MainScreen());
-                  },
+                  onPressed: controller.handleSubmit,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     minimumSize: Size(double.infinity, 50.h),

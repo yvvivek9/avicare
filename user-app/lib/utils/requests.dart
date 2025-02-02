@@ -1,10 +1,11 @@
+import 'package:avicare/utils/utils.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:developer' as developer;
 
-// import 'package:client/Login/page.dart';
+import 'package:avicare/temp/auth/signIn/page.dart';
 
 const String apiKey = "fnw4ua8bdueu5vckkhg56jaq8xy9m8";
 const String domain = "http://34.47.250.183:5000";
@@ -31,15 +32,17 @@ Future<dynamic> httpPostRequest({
     final decodedResponse = jsonDecode(response.body);
     if (response.statusCode == successCode) {
       return decodedResponse;
+    } else if (response.statusCode == 400) {
+      throw Exception(decodedResponse["detail"]);
     } else if (response.statusCode == 401) {
-      developer.log("JWT token invalid $response");
       await prefs.remove("token");
-      // Get.offAll(() => LoginScreen());
-      throw Exception(decodedResponse["detail"] ?? "Authorization error");
+      Get.offAll(() => SignInScreen());
+      throw Exception("Session expired! Please login again.");
     } else {
-      throw Exception(decodedResponse["detail"] ?? "Fetch error");
+      throw Exception("Unexpected error occurred!. Please try again");
     }
   } catch (e) {
-    rethrow;
+    safePrint(e);
+    throw Exception("Unexpected error occurred!. Please try again");
   }
 }

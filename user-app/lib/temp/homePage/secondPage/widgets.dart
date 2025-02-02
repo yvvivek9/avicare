@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../screens/widget/progress_steps_indicator.dart';
-import '../../screens/exercise_screen/exercise_details_screen.dart';
+import 'package:avicare/screens/widget/progress_steps_indicator.dart';
+import 'package:avicare/screens/exercise_screen/exercise_details_screen.dart';
 import 'package:avicare/model/protocols.dart';
 import 'package:avicare/model/exercise.dart';
 

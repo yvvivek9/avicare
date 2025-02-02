@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
-import 'package:avicare/model/user.dart';
+import 'package:avicare/temp/auth/register/page.dart';
 
 final nameRegEx = RegExp(r"\b([-,a-zA-ZÀ-ÿ. ']+[ ]*)+");
 final phoneRegex = RegExp(r"[1-9][0-9]{9}");
@@ -33,14 +35,29 @@ class SignupController extends GetxController {
   Future<void> handleSignUp() async {
     if (validateInputs()) {
       try {
-        final response = await httpPostRequest(route: "", body: body)
+        Get.context!.loaderOverlay.show();
+        final response = await httpPostRequest(
+          route: "/user/signup/email",
+          body: {
+            "name": fullNameController.text,
+            "email": emailController.text,
+            "mobile": "${selectedCountry.value.phoneCode}${phoneController.text}",
+            "password": passwordController.text,
+          },
+        );
+
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("token", response["token"]);
+
+        Get.offAll(() => RegisterScreen());
       } catch (e) {
-        safePrint(e);
-        Fluttertoast.showToast(msg: "Unexpected error occurred. Please try again!");
+        Fluttertoast.showToast(msg: e.toString());
+      } finally {
+        Get.context!.loaderOverlay.hide();
       }
     }
   }
-  
+
   bool validateInputs() {
     if (!nameRegEx.hasMatch(fullNameController.text)) {
       Fluttertoast.showToast(msg: "Invalid name");
@@ -55,7 +72,11 @@ class SignupController extends GetxController {
       return false;
     }
     if (!pswdRegex.hasMatch(passwordController.text)) {
-      Fluttertoast.showToast(msg: "Invalid password");
+      Fluttertoast.showToast(msg: "Weak password");
+      return false;
+    }
+    if (!isChecked.value) {
+      Fluttertoast.showToast(msg: "Accept terms and conditions!");
       return false;
     }
     return true;
