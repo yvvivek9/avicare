@@ -6,7 +6,7 @@ import 'dart:developer' as developer;
 
 // import 'package:client/Login/page.dart';
 
-// const String domain = "http://192.168.1.21:5000";
+const String apiKey = "fnw4ua8bdueu5vckkhg56jaq8xy9m8";
 const String domain = "http://34.47.250.183:5000";
 
 Future<dynamic> httpPostRequest({
@@ -22,6 +22,7 @@ Future<dynamic> httpPostRequest({
       Uri.parse(domain + route),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'X-API-Key': apiKey,
         'Authorization': token != null ? 'Bearer $token' : '',
       },
       body: jsonEncode(body),

@@ -21,7 +21,7 @@ class Protocol {
   static Future<List<Protocol>> fetchProtocolList() async {
     final List<Protocol> protocolList = [];
     
-    final response = await httpPostRequest(route: "/user/protocol/list", body: {});
+    final response = await httpPostRequest(route: "/data/protocol/list", body: {});
     final tempList = List.from(response);
 
     for (final temp in tempList) {

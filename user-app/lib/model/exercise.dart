@@ -22,7 +22,7 @@ class Exercise {
 
   static Future<Exercise> fetchExerciseById(String id) async {
     final response = await httpPostRequest(
-      route: "/user/exercise/get",
+      route: "/data/exercise/get",
       body: {"exercise_id": id},
     );
 

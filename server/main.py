@@ -1,13 +1,11 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 
 from dotenv import load_dotenv
 load_dotenv()
 
-from routes import protocols, user
-
+from config.auth import validate_api_key
+from routes import router
 
 fastAPI = FastAPI()
 fastAPI.add_middleware(
@@ -17,8 +15,7 @@ fastAPI.add_middleware(
     allow_headers=["*"],
 )
 
-fastAPI.include_router(protocols.router, prefix="/data", tags=["data"])
-fastAPI.include_router(user.router, prefix="/user", tags=["user"])
+fastAPI.include_router(router, dependencies=[Depends(validate_api_key)])
 
 # @fastAPI.get("/")
 # async def index_route():

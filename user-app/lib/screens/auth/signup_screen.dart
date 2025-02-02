@@ -28,7 +28,7 @@ class SignupController extends GetxController {
 class SignupScreen extends StatelessWidget {
   final controller = Get.put(SignupController());
 
-  SignupScreen({Key? key}) : super(key: key);
+  SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

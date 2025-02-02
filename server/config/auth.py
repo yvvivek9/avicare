@@ -1,5 +1,5 @@
-from fastapi import Depends, HTTPException
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi import Depends, HTTPException, Security
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials, APIKeyHeader
 import time
 import jwt
 import os
@@ -7,6 +7,8 @@ import os
 JWT_SECRET = os.getenv('JWT_SECRET')
 JWT_ALGORITHM = os.getenv('JWT_ALGORITHM')
 JWT_VALIDITY = os.getenv('JWT_VALIDITY')  # in seconds
+
+VALID_API_KEYS = {os.getenv('API_KEY')}
 
 
 async def sign_jwt(user_id: str) -> str:
@@ -27,3 +29,9 @@ async def verify_jwt(security: HTTPAuthorizationCredentials = Depends(HTTPBearer
     except Exception as e:
         print(f"Error verifying JWT: {e}")
         raise HTTPException(status_code=401, detail="Invalid authentication")
+
+
+api_key_header = APIKeyHeader(name="X-API-Key")
+def validate_api_key(api_key: str = Security(api_key_header)):
+    if api_key not in VALID_API_KEYS:
+        raise HTTPException(status_code=403, detail="Missing or invalid API key")
