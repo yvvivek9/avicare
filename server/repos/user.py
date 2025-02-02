@@ -1,4 +1,4 @@
-from default import *
+from repos.default import *
 
 COLLECTION_NAME = "users"
 
