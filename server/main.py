@@ -6,7 +6,7 @@ from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 load_dotenv()
 
-from routes import protocols
+from routes import protocols, user
 
 
 fastAPI = FastAPI()
@@ -17,7 +17,8 @@ fastAPI.add_middleware(
     allow_headers=["*"],
 )
 
-fastAPI.include_router(protocols.router, prefix="/user", tags=["user"])
+fastAPI.include_router(protocols.router, prefix="/data", tags=["data"])
+fastAPI.include_router(user.router, prefix="/user", tags=["user"])
 
 # @fastAPI.get("/")
 # async def index_route():
