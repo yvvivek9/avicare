@@ -36,6 +36,16 @@ class Protocol {
     return protocolList;
   }
 
+  static Future<Protocol> fetchProtocolByID(String id) async {
+    final response = await httpPostRequest(route: "/data/protocol/get", body: {"protocol_id": id});
+    final temp = List.from(response["exercises"]);
+    final List<ExerciseDataHolder> exeList = [];
+    for (final t in temp) {
+      exeList.add(ExerciseDataHolder(name: t["name"], exerciseID: t["exercise_id"]));
+    }
+    return Protocol(name: response["name"], exercises: exeList);
+  }
+
   @override
   String toString() {
     return 'Protocol{name: $name, exercises: $exercises}';

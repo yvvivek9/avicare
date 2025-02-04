@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -17,7 +19,7 @@ fastAPI.add_middleware(
 
 fastAPI.include_router(router, dependencies=[Depends(validate_api_key)])
 
-# @fastAPI.get("/")
-# async def index_route():
-#     return FileResponse("static/index.html")
-# fastAPI.mount("/", StaticFiles(directory="static"), name="flutter")
+@fastAPI.get("/")
+async def index_route():
+    return FileResponse("static/index.html")
+fastAPI.mount("/", StaticFiles(directory="static"), name="flutter")

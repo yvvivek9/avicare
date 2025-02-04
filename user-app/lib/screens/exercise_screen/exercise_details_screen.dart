@@ -50,7 +50,7 @@ class ExerciseDetailsScreen extends StatelessWidget {
               children: [
                 YoutubePlayer(
                   controller: YoutubePlayerController(
-                    initialVideoId: YoutubePlayer.convertUrlToId(exercise.youtube)!,
+                    initialVideoId: YoutubePlayer.convertUrlToId(exercise.youtube) ?? "",
                     flags: YoutubePlayerFlags(
                       autoPlay: false,
                       mute: false,

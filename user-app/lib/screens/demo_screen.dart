@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'exercise_screen/exercise_details_screen.dart';
-import 'exercise_screen/exercise_screen_2.dart';
+import '../temp/protocolDetails/page.dart';
 import 'extra_screens/end_screen.dart';
 import 'extra_screens/end_screen_2.dart';
 import 'extra_screens/error_screen.dart';
@@ -72,14 +72,14 @@ class DemoScreen extends StatelessWidget {
       {'widget': StatisticsScreen(), 'title': "Statistics screen"},
       {'widget': StatisticsScreen2(), 'title': "Statistics screen 2"},
       // {'widget': RegisterScreen(), 'title': "Register"},
-      {'widget': ExerciseScreen(), 'title': "Exercise"},
-      {
-        'widget': ExerciseScreen2(
-          title: "Exercise 2",
-          numberOfExercises: 6,
-        ),
-        'title': "Exercise 2"
-      },
+      // {'widget': ExerciseScreen(), 'title': "Exercise"},
+      // {
+      //   'widget': ProtocolDetails(
+      //     title: "Exercise 2",
+      //     numberOfExercises: 6,
+      //   ),
+      //   'title': "Exercise 2"
+      // },
       // {'widget': ExerciseDetailsScreen(), 'title': "Exercise Details"},
       {'widget': BioFeedbackScreen(), 'title': "Bio Feedback"},
     ];

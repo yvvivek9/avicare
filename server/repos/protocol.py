@@ -20,6 +20,14 @@ async def list_protocols() -> List[Protocol]:
         ret_list.append(Protocol(**r))
     return ret_list
 
+async def get_protocol_by_id(uid: str) -> Optional[Protocol]:
+    db = await get_database()
+    clc = db[COLLECTION_NAME]
+    res = clc.find_one({"_id": ObjectId(uid)})
+    if res:
+        return Protocol(**res)
+    return None
+
 async def insert_protocol(protocol: Protocol):
     await insert_to_collection(COLLECTION_NAME, protocol)
 

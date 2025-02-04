@@ -1,5 +1,5 @@
 import 'package:avicare/constants/colors.dart';
-import 'package:avicare/screens/exercise_screen/exercise_screen_2.dart';
+import 'package:avicare/temp/protocolDetails/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -34,7 +34,7 @@ class Protocols extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               individualProtocolContainer(
-                numberOfExercises: 10,
+                protocolID: "679be021358bdec41ce0682b",
                 color: AppColors.darkPeach,
                 height: 210,
                 width: 164,
@@ -47,7 +47,7 @@ class Protocols extends StatelessWidget {
               Column(
                 children: [
                   individualProtocolContainer(
-                    numberOfExercises: 10,
+                    protocolID: "679be022358bdec41ce0682d",
                     title: "PCL",
                     description: "10 Exercises",
                     image: "bone.png",
@@ -61,15 +61,15 @@ class Protocols extends StatelessWidget {
                     height: 10.h,
                   ),
                   individualProtocolContainer(
+                    protocolID: "67a1b339cc1bf9c5ce3f0e71",
                     title: "Total Knee \nReplacement",
-                    description: "10 Exercises",
+                    description: "15 Exercises",
                     image: 'knee-3.png',
                     imageWidth: 30,
                     imageHeight: 40,
                     color: AppColors.pink,
                     width: 161,
                     height: 100,
-                    numberOfExercises: 10,
                   ),
                 ],
               ),
@@ -82,6 +82,7 @@ class Protocols extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               individualProtocolContainer(
+                protocolID: "679be022358bdec41ce0682f",
                 title: "Hip \nrehab \nprotocol",
                 description: "12 Exercises",
                 image: "chest.png",
@@ -90,9 +91,9 @@ class Protocols extends StatelessWidget {
                 color: AppColors.purple,
                 width: 144,
                 height: 125,
-                numberOfExercises: 12,
               ),
               individualProtocolContainer(
+                protocolID: "67a1b1e3cc1bf9c5ce3f0e70",
                 title: "Ankle rehab \nprotocol",
                 description: "13 Exercises",
                 image: "leg.png",
@@ -101,7 +102,6 @@ class Protocols extends StatelessWidget {
                 color: AppColors.green,
                 width: 184,
                 height: 125,
-                numberOfExercises: 13,
               ),
             ],
           ),
@@ -109,15 +109,15 @@ class Protocols extends StatelessWidget {
             height: 10.h,
           ),
           individualProtocolContainer(
+            protocolID: "67a1b13ecc1bf9c5ce3f0e6f",
             title: "Meniscus repair \nProtocol ",
-            description: "9 Exercises",
+            description: "10 Exercises",
             image: "knee-2.png",
             imageWidth: 170,
             imageHeight: 70,
             color: AppColors.lightBlue,
             width: 332,
             height: 100,
-            numberOfExercises: 9,
           ),
           SizedBox(
             height: 100.h,
@@ -129,7 +129,7 @@ class Protocols extends StatelessWidget {
 }
 
 Widget individualProtocolContainer({
-  required int numberOfExercises,
+  required String protocolID,
   required int height,
   required int width,
   required Color color,
@@ -142,7 +142,7 @@ Widget individualProtocolContainer({
   return ZoomTapAnimation(
     onTap: () {
       Get.to(() =>
-          ExerciseScreen2(title: title, numberOfExercises: numberOfExercises));
+          ProtocolDetails(protocolID: protocolID));
     },
     child: Container(
       height: height.h,

@@ -1,4 +1,4 @@
-import 'package:avicare/screens/exercise_screen/exercise_screen_2.dart';
+import 'package:avicare/temp/protocolDetails/page.dart';
 import 'package:avicare/screens/widget/build_image.dart';
 import 'package:avicare/screens/widget/icon_button.dart';
 import 'package:avicare/screens/widget/progress_steps_indicator.dart';
@@ -94,7 +94,10 @@ class ExerciseScreen extends StatelessWidget {
                 SizedBox(height: 20.h),
                 Expanded(
                   child: TabBarView(
-                    children: controller.protocolsList.value.map((e) => ExerciseList(exercises: e.exercises)).toList(),
+                    children: controller.protocolsList.value.map((e) => Padding(
+                      padding: EdgeInsets.only(bottom: 100.h),
+                      child: ExerciseList(exercises: e.exercises),
+                    )).toList(),
                     // children: [
                     //   _buildExerciseList(),
                     //   _buildCategoryContent('ACL Exercises'),
@@ -203,103 +206,6 @@ class ExerciseScreen extends StatelessWidget {
           fontSize: 18.sp,
           color: Colors.white,
         ),
-      ),
-    );
-  }
-
-  Widget _buildExerciseList() {
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) => _buildExerciseItem(),
-    );
-  }
-
-  Widget _buildExerciseItem() {
-    return Container(
-      height: 80.h,
-      margin: EdgeInsets.only(bottom: 10.h),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xff898989).withValues(alpha: 0),
-            Color(0xffefefef).withValues(alpha: 0.4),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(10.r),
-      ),
-      child: Row(
-        children: [
-          CachedNetworkImage(
-            imageUrl:
-            'https://firebasestorage.googleapis.com/v0/b/blue-bit-simple.appspot.com/o/gym.jpeg?alt=media&token=e786b8ca-0d6c-4df9-9648-281ab2ef9877',
-            imageBuilder: (context, imageProvider) {
-              return Container(
-                height: 80.h,
-                width: 100.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.r),
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              );
-            },
-            placeholder: (context, url) =>
-                Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) => Icon(Icons.error),
-            fit: BoxFit.cover,
-          ),
-          // Image.network(
-          //   'https://cdn.pixabay.com/photo/2017/07/02/19/24/dumbbells-2465478_1280.jpg',
-          //   height: 80.h,
-          //   width: 100.w,
-          //   fit: BoxFit.cover,
-          // ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Knee extension',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  Text(
-                    '3:00 pm - 3:45 pm',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(height: 10.h),
-                  ProgressStepsIndicator(totalSteps: 4, currentStep: 3),
-                ],
-              ),
-            ),
-          ),
-          ZoomTapAnimation(
-            onTap: () {
-              Get.to(() => ExerciseScreen2(
-                title: "Knee extension",
-                numberOfExercises: 10,
-              ));
-            },
-            child: Icon(
-              Icons.arrow_forward,
-              size: 20.sp,
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(width: 15.w),
-        ],
       ),
     );
   }

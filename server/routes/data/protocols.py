@@ -13,6 +13,13 @@ async def list_protocols_route() -> List[protocol.Protocol]:
     return await protocol.list_protocols()
 
 
+class GetProtocolRequest(BaseModel):
+    protocol_id: str
+
+@router.post("/protocol/get")
+async def get_protocol_route(request: GetProtocolRequest) -> protocol.Protocol:
+    return await protocol.get_protocol_by_id(uid=request.protocol_id)
+
 class GetExerciseRequest(BaseModel):
     exercise_id: str
 

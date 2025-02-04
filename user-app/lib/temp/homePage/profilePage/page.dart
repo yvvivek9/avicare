@@ -28,7 +28,7 @@ class ProfilePage extends StatelessWidget {
           Row(
             children: [
               ZoomTapAnimation(
-                onTap: () {},
+                onTap: controller.handleLogout,
                 child: Container(
                   width: 44.w,
                   height: 44.w,
@@ -253,14 +253,6 @@ class ProfilePage extends StatelessWidget {
               ),
               SizedBox(
                 height: 15.h,
-              ),
-              generalOption(
-                title: "Log out",
-                prefixIcon: Icons.logout,
-                onTap: controller.handleLogout,
-              ),
-              SizedBox(
-                height: 100.h,
               ),
             ],
           ),

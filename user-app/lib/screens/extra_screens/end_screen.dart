@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widget/icon_button.dart';
 import 'end_screen_2.dart';
+import 'package:avicare/temp/auth/signUp/page.dart';
 
 class EndScreen extends StatelessWidget {
   @override
@@ -78,7 +79,7 @@ class EndScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () => Get.back(),
+                    onPressed: () => Get.to(() => EndScreen2()),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey[800],
                       padding: EdgeInsets.symmetric(vertical: 22.h),
@@ -89,7 +90,7 @@ class EndScreen extends StatelessWidget {
                 ),
                 SizedBox(width: 10.w),
                 bottomSheetIconButton(
-                  onTap: () {},
+                  onTap: () => Get.to(() => SignupScreen()),
                   text: "Sign up",
                   color: AppColors.blue,
                 ),

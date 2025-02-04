@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:avicare/temp/auth/signUp/page.dart';
 
 class EndScreen2 extends StatelessWidget {
   @override
@@ -66,7 +69,7 @@ class EndScreen2 extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () => Get.to(() => SignupScreen()),
               child: Text(
                 'Create Account',
                 style: TextStyle(
