@@ -8,12 +8,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+import 'package:avicare/utils/utils.dart';
+import 'package:avicare/model/user.dart';
 import '../../../constants/colors.dart';
 import '../../../screens/notification/notification_screen.dart';
 
+class HomeScreen2Controller extends GetxController {
+  final user = Rx<User?>(null);
+
+  @override
+  void onInit() {
+    fetchUserData();
+    super.onInit();
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      if (prefs.getString("token") == null) return;
+
+      final response = await httpPostRequest(route: "/user/details/get", body: {});
+      user.value = User.fromJSON(response);
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+    }
+  }
+}
+
 class HomeScreen2 extends StatelessWidget {
-  const HomeScreen2({super.key});
+  HomeScreen2({super.key});
+
+  final controller = Get.put(HomeScreen2Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +60,7 @@ class HomeScreen2 extends StatelessWidget {
                     Row(
                       children: [
                         buildImage(
-                          imagePath:
-                              'https://emojiisland.com/cdn/shop/products/39_large.png?v=1571606117',
+                          imagePath: 'https://emojiisland.com/cdn/shop/products/39_large.png?v=1571606117',
                         ),
                         SizedBox(
                           width: 10.w,
@@ -41,12 +68,14 @@ class HomeScreen2 extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "Rohini Dighe",
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                            Obx(
+                              () => Text(
+                                controller.user.value != null ? controller.user.value!.name : "Guest User",
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -110,8 +139,7 @@ class HomeScreen2 extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: individualDatesData.length,
                   itemBuilder: (context, index) {
-                    return individualDates(
-                        individualDatesModel: individualDatesData[index]);
+                    return individualDates(individualDatesModel: individualDatesData[index]);
                   },
                 ),
               ),

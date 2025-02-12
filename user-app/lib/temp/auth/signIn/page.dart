@@ -148,8 +148,7 @@ class SignInScreen extends StatelessWidget {
                 height: 10.h,
               ),
               ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: controller.handleGoogleLogin,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   minimumSize: Size(double.infinity, 60.h),

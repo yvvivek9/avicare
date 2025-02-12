@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:avicare/temp/onBoarding/access_page.dart';
 
@@ -13,6 +14,22 @@ final pswdRegex = RegExp(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
 class SigninController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  Future<void> handleGoogleLogin() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        scopes: <String>[
+          'email',
+        ],
+      );
+
+      var googleUser = await googleSignIn.signIn();
+      await googleSignIn.signOut();
+      Fluttertoast.showToast(msg: "Unexpected error occurred, please try again!");
+    } catch(e) {
+      Fluttertoast.showToast(msg: "Unexpected error occurred, please try again!");
+    }
+  }
 
   Future<void> handleEmailSigninIn() async {
     if (validateInputs()) {

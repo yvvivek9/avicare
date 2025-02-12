@@ -9,6 +9,7 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import 'controller.dart';
 import 'package:avicare/screens/demo_screen.dart';
+import 'package:avicare/temp/policies/privacy_policy.dart';
 import 'package:avicare/screens/widget/build_image.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -243,6 +244,7 @@ class ProfilePage extends StatelessWidget {
                 title: "Privacy Policy",
                 prefixIcon: Icons.privacy_tip_outlined,
                 switchWidget: null,
+                onTap: () => Get.to(() => PrivacyPolicyScreen()),
               ),
               SizedBox(
                 height: 15.h,

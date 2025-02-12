@@ -14,7 +14,7 @@ class MainScreen extends StatelessWidget {
   final NavigationController controller = Get.put(NavigationController());
 
   final List<Widget> pages = [
-    const HomeScreen2(),
+    HomeScreen2(),
     ExerciseScreen(),
     StatisticsScreen(),
     ProfilePage(),

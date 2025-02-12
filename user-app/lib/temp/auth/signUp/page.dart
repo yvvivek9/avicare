@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,8 @@ import 'package:avicare/temp/auth/signIn/page.dart';
 import 'package:avicare/temp/onBoarding/access_page.dart';
 import 'package:avicare/constants/colors.dart';
 import 'package:avicare/screens/widget/build_text_field.dart';
+import 'package:avicare/temp/policies/privacy_policy.dart';
+import 'package:avicare/temp/policies/terms_conditions.dart';
 import 'controller.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -147,11 +150,13 @@ class SignupScreen extends StatelessWidget {
                             TextSpan(
                               text: 'Terms & Conditions',
                               style: TextStyle(color: Colors.blue),
+                              recognizer: TapGestureRecognizer()..onTap = () => Get.to(() => TermsConditionsScreen()),
                             ),
                             TextSpan(text: ' and '),
                             TextSpan(
                               text: 'Privacy Policy',
                               style: TextStyle(color: Colors.blue),
+                              recognizer: TapGestureRecognizer()..onTap = () => Get.to(() => PrivacyPolicyScreen()),
                             ),
                           ],
                         ),
