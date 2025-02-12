@@ -4,7 +4,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 
 import 'package:avicare/utils/utils.dart';
 import 'package:avicare/model/user.dart';
-import 'package:avicare/temp/homePage/page.dart';
+import 'package:avicare/temp/onBoarding/access_page.dart';
 
 final decimalRegex = RegExp(r"[0-9]*\.*[0-9]*");
 
@@ -47,7 +47,7 @@ class ProfileController extends GetxController {
       user.height = "${height.value} ${heightUnit.value}";
 
       final response2 = await httpPostRequest(route: "/user/details/update", body: user.toJSON());
-      Get.offAll(() => MainScreen());
+      Get.offAll(() => AccessPage());
     } catch(e) {
       Fluttertoast.showToast(msg: "Unexpected error occurred, please try again!");
     } finally {

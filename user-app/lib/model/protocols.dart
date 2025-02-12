@@ -1,53 +1,46 @@
 import 'package:avicare/utils/utils.dart';
 
-class ExerciseDataHolder {
-  ExerciseDataHolder({required this.name, required this.exerciseID});
-
-  final String name;
-  final String exerciseID;
-
-  @override
-  String toString() {
-    return 'ExerciseDataHolder{name: $name, exerciseID: $exerciseID}';
-  }
-}
-
 class Protocol {
-  Protocol({required this.name, required this.exercises});
+  Protocol({required this.id, required this.name, required this.description, required this.image, required this.exercises});
 
-  final String name;
-  final List<ExerciseDataHolder> exercises;
+  final String id;
+  String name;
+  String description;
+  String image;
+  List<String> exercises;
 
-  static Future<List<Protocol>> fetchProtocolList() async {
-    final List<Protocol> protocolList = [];
-    
+
+  static Future<List<Protocol>> listProtocols() async {
     final response = await httpPostRequest(route: "/data/protocol/list", body: {});
-    final tempList = List.from(response);
-
-    for (final temp in tempList) {
-      final exeTempList = List.from(temp["exercises"]);
-      final List<ExerciseDataHolder> exeList = [];
-      for (final exe in exeTempList) {
-        exeList.add(ExerciseDataHolder(name: exe["name"], exerciseID: exe["exercise_id"]));
-      }
-      protocolList.add(Protocol(name: temp["name"], exercises: exeList));
-    }
-    
-    return protocolList;
+    return List.from(response).map((e) => fromJSON(e)).toList();
   }
 
-  static Future<Protocol> fetchProtocolByID(String id) async {
-    final response = await httpPostRequest(route: "/data/protocol/get", body: {"protocol_id": id});
-    final temp = List.from(response["exercises"]);
-    final List<ExerciseDataHolder> exeList = [];
-    for (final t in temp) {
-      exeList.add(ExerciseDataHolder(name: t["name"], exerciseID: t["exercise_id"]));
-    }
-    return Protocol(name: response["name"], exercises: exeList);
+  static Future<Protocol> fetchProtocolById(String id) async {
+    final response = await httpPostRequest(
+      route: "/data/protocol/get",
+      body: {"protocol_id": id},
+    );
+    return fromJSON(response);
   }
+
+  static Protocol fromJSON(Map<String, dynamic> json) => Protocol(
+    id: json["_id"],
+    name: json["name"],
+    description: json["description"],
+    image: json["image"],
+    exercises: List<String>.from(json["exercises"]),
+  );
+
+  Map<String, dynamic> toJSON() => {
+    "_id": id,
+    "name": name,
+    "description": description,
+    "image": image,
+    "exercises": exercises,
+  };
 
   @override
   String toString() {
-    return 'Protocol{name: $name, exercises: $exercises}';
+    return 'protocol{name: $name, description: $description, steps: $exercises}';
   }
 }

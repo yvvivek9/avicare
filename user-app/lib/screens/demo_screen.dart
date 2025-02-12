@@ -14,7 +14,7 @@ import 'extra_screens/end_screen_2.dart';
 import 'extra_screens/error_screen.dart';
 import 'extra_screens/error_screen_2.dart';
 import 'exercise_screen/exercise_screen.dart';
-import 'extra_screens/access_page.dart';
+import '../temp/onBoarding/access_page.dart';
 import 'extra_screens/workout_completed_screen.dart';
 import 'statistics_user_list.dart';
 

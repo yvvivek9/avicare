@@ -16,7 +16,7 @@ class ProtocolListController extends GetxController {
 
   Future<void> fetchProtocolsList() async {
     try {
-      protocolsList.value = await Protocol.fetchProtocolList();
+      protocolsList.value = await Protocol.listProtocols();
     } catch(e) {
       safePrint(e);
       Fluttertoast.showToast(msg: e.toString());

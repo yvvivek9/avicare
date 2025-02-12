@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-import 'package:avicare/temp/homePage/page.dart';
+import 'package:avicare/temp/onBoarding/access_page.dart';
 
 final emailRegex = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
 final pswdRegex = RegExp(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
@@ -29,7 +29,7 @@ class SigninController extends GetxController {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString("token", response["token"]);
 
-        Get.offAll(() => MainScreen());
+        Get.offAll(() => AccessPage());
       } catch(e) {
         Fluttertoast.showToast(msg: e.toString());
       } finally {

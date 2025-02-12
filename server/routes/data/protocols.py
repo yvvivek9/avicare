@@ -27,3 +27,7 @@ class GetExerciseRequest(BaseModel):
 async def get_exercise_route(request: GetExerciseRequest) -> exercise.Exercise:
     result = await exercise.find_exercise_by_id(uid=request.exercise_id)
     return result
+
+@router.post("/exercise/list")
+async def list_exercise_route() -> List[exercise.Exercise]:
+    return await exercise.list_exercise()

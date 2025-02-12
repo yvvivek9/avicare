@@ -6,12 +6,18 @@ import 'package:avicare/utils/utils.dart';
 import 'package:avicare/model/protocols.dart';
 
 class ProtocolDetailsController extends GetxController {
-  final protocol = Protocol(name: " -- ", exercises: []).obs;
+  final protocol = Protocol(id: "", name: " -- ", exercises: [], description: "", image: "").obs;
 
-  Future<void> fetchProtocolDetails(String protocolID) async {
+  Future<void> fetchProtocolDetails(String protocolName) async {
     try {
       Get.context!.loaderOverlay.show();
-      protocol.value = await Protocol.fetchProtocolByID(protocolID);
+      final list = await Protocol.listProtocols();
+      final found = list.firstWhereOrNull((e) => e.name == protocolName);
+      if (found == null) {
+        Get.back();
+        Fluttertoast.showToast(msg: "Protocol not found.");
+      }
+      protocol.value = found!;
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     } finally {

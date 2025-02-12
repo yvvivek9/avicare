@@ -10,7 +10,8 @@ class Exercise(MongoDbBaseModel):
     name: str
     description: str
     youtube: str
-    steps: List[ExerciseStep]
+    image: str
+    steps: List[str]
 
 
 async def find_exercise_by_id(uid: str) -> Optional[Exercise]:

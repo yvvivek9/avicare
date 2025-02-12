@@ -142,7 +142,7 @@ Widget individualProtocolContainer({
   return ZoomTapAnimation(
     onTap: () {
       Get.to(() =>
-          ProtocolDetails(protocolID: protocolID));
+          ProtocolDetails(protocolName: title));
     },
     child: Container(
       height: height.h,

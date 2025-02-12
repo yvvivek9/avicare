@@ -197,16 +197,4 @@ class ExerciseScreen extends StatelessWidget {
       // ),
     );
   }
-
-  Widget _buildCategoryContent(String category) {
-    return Center(
-      child: Text(
-        category,
-        style: TextStyle(
-          fontSize: 18.sp,
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
 }

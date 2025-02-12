@@ -8,7 +8,9 @@ class ExerciseDataHolder(BaseModel):
 
 class Protocol(MongoDbBaseModel):
     name: str
-    exercises: List[ExerciseDataHolder]
+    description: str
+    image: str
+    exercises: List[str]
 
 
 async def list_protocols() -> List[Protocol]:

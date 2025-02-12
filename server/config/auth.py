@@ -11,9 +11,10 @@ JWT_VALIDITY = os.getenv('JWT_VALIDITY')  # in seconds
 VALID_API_KEYS = {os.getenv('API_KEY')}
 
 
-async def sign_jwt(user_id: str) -> str:
+async def sign_jwt(user_id: str, user_type: str) -> str:
     payload = {
         "user_id": user_id,
+        "user_type": user_type,
         "expires": time.time() + float(JWT_VALIDITY),
     }
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
@@ -24,6 +25,21 @@ async def verify_jwt(security: HTTPAuthorizationCredentials = Depends(HTTPBearer
         decoded = jwt.decode(security.credentials, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         if decoded["expires"] >= time.time():
             return decoded["user_id"]
+        else:
+            raise HTTPException(status_code=401, detail="Authorization expired")
+    except Exception as e:
+        print(f"Error verifying JWT: {e}")
+        raise HTTPException(status_code=401, detail="Invalid authentication")
+
+
+async def verify_jwt_admin(security: HTTPAuthorizationCredentials = Depends(HTTPBearer(scheme_name='Bearer'))) -> str:
+    try:
+        decoded = jwt.decode(security.credentials, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        if decoded["expires"] >= time.time():
+            if decoded["user_type"] == "admin":
+                return decoded["user_id"]
+            else:
+                raise HTTPException(status_code=403, detail="Invalid user role")
         else:
             raise HTTPException(status_code=401, detail="Authorization expired")
     except Exception as e:

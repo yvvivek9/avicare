@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:avicare/screens/statistics_screens/statistics_screen.dart';
 import 'firstPage/page.dart';
@@ -26,8 +27,10 @@ class MainScreen extends StatelessWidget {
     return SafeArea(
       child: PopScope(
         canPop: false,
-        onPopInvokedWithResult: (x, y) {
-          Get.to(() => EndScreen());
+        onPopInvokedWithResult: (x, y) async {
+          final prefs = await SharedPreferences.getInstance();
+          final session = prefs.getString("token");
+          if(session == null) Get.to(() => EndScreen());
         },
         child: Scaffold(
           body: Stack(

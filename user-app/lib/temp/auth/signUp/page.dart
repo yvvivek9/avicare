@@ -5,7 +5,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import 'package:avicare/temp/auth/signIn/page.dart';
-import 'package:avicare/temp/homePage/page.dart';
+import 'package:avicare/temp/onBoarding/access_page.dart';
 import 'package:avicare/constants/colors.dart';
 import 'package:avicare/screens/widget/build_text_field.dart';
 import 'controller.dart';
@@ -193,7 +193,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Get.offAll(() => MainScreen());
+                      Get.offAll(() => AccessPage());
                     },
                     child: Text(
                       'Continue as guest',

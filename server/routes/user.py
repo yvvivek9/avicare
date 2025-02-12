@@ -29,7 +29,7 @@ async def signup_via_email_route(request: SignUpEmailRequest) -> LoginResponse:
         password=hash_pswd(request.password),
     ))
     new = await user.find_user_by_query({"email": request.email})
-    return LoginResponse(token=await sign_jwt(user_id=new.id))
+    return LoginResponse(token=await sign_jwt(user_id=new.id, user_type="user"))
 
 class LoginEmailRequest(BaseModel):
     email: str
@@ -39,7 +39,7 @@ class LoginEmailRequest(BaseModel):
 async def login_via_email_route(request: LoginEmailRequest) -> LoginResponse:
     result = await user.find_user_by_query({"email": request.email})
     if result and check_pswd(hashed=result.password, original=request.password):
-        return LoginResponse(token=await sign_jwt(user_id=result.id))
+        return LoginResponse(token=await sign_jwt(user_id=result.id, user_type="user"))
     else:
         raise HTTPException(status_code=400, detail="Invalid credentials")
 
@@ -65,7 +65,7 @@ async def login_via_google_route(request: LoginGoogleRequest) -> LoginResponse:
             google_check.google_id = request.google_id
             await user.update_user(google_check.id, google_check)
 
-    return LoginResponse(token= await sign_jwt(user_id=google_check.id))
+    return LoginResponse(token= await sign_jwt(user_id=google_check.id, user_type="user"))
 
 @router.post("/details/get")
 async def get_user_details_route(uid: str = Depends(verify_jwt)) -> user.User:

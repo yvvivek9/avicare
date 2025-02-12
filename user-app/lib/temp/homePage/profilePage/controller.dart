@@ -19,6 +19,9 @@ class ProfilePageController extends GetxController {
 
   Future<void> fetchUserData() async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      if (prefs.getString("token") == null) return;
+
       final response = await httpPostRequest(route: "/user/details/get", body: {});
       user.value = User.fromJSON(response);
     } catch(e) {

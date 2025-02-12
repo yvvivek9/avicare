@@ -12,11 +12,11 @@ import 'controller.dart';
 
 class ProtocolDetails extends StatelessWidget {
   ProtocolDetails(
-      {super.key, required this.protocolID}) {
-    controller.fetchProtocolDetails(protocolID);
+      {super.key, required this.protocolName}) {
+    controller.fetchProtocolDetails(protocolName);
   }
 
-  final String protocolID;
+  final String protocolName;
   final controller = Get.put(ProtocolDetailsController());
 
   @override
