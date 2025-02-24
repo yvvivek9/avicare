@@ -63,7 +63,7 @@ class RegisterScreen extends StatelessWidget {
                 _buildMeasurementField(
                   prefixIcon: Icons.monitor_weight_outlined,
                   label: 'Your Weight',
-                  units: ['kgs', 'pound'],
+                  units: ['kgs', 'lbs'],
                   onValueChanged: controller.setWeight,
                   onUnitChanged: controller.toggleWeightUnit,
                   controller: controller.weightUnit,
@@ -72,7 +72,7 @@ class RegisterScreen extends StatelessWidget {
                 _buildMeasurementField(
                   prefixIcon: Icons.height_outlined,
                   label: 'Your Height',
-                  units: ['cm', 'inch', 'foot'],
+                  units: ['cm', 'inch', 'ft'],
                   onValueChanged: controller.setHeight,
                   onUnitChanged: controller.toggleHeightUnit,
                   controller: controller.heightUnit,

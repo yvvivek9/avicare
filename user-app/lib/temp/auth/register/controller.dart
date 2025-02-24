@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+import 'package:avicare/temp/homePage/page.dart';
+import 'package:avicare/temp/onBoarding/access_page.dart';
 import 'package:avicare/utils/utils.dart';
 import 'package:avicare/model/user.dart';
-import 'package:avicare/temp/onBoarding/access_page.dart';
 
 final decimalRegex = RegExp(r"[0-9]*\.*[0-9]*");
 
@@ -47,7 +49,7 @@ class ProfileController extends GetxController {
       user.height = "${height.value} ${heightUnit.value}";
 
       final response2 = await httpPostRequest(route: "/user/details/update", body: user.toJSON());
-      Get.offAll(() => AccessPage());
+      checkPermissionsAndRedirect();
     } catch(e) {
       Fluttertoast.showToast(msg: "Unexpected error occurred, please try again!");
     } finally {
@@ -86,5 +88,23 @@ class ProfileController extends GetxController {
     }
 
     return true;
+  }
+
+  Future<void> checkPermissionsAndRedirect() async {
+    final permissions = [
+      Permission.nearbyWifiDevices,
+      Permission.bluetooth,
+      Permission.bluetoothScan,
+      Permission.bluetoothConnect,
+      Permission.location,
+      Permission.camera,
+    ];
+    for (final p in permissions) {
+      if (!await p.status.isGranted) {
+        Get.offAll(() => AccessPage());
+        return;
+      }
+    }
+    Get.offAll(() => MainScreen());
   }
 }

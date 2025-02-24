@@ -8,7 +8,7 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../widget/timeline_widget.dart';
 
-import '../bio_feedback_screen.dart';
+import '../../temp/bioFeedback/bio_feedback_screen.dart';
 import 'package:avicare/model/exercise.dart';
 
 class ExerciseDetailsController extends GetxController {

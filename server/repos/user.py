@@ -13,6 +13,8 @@ class User(MongoDbBaseModel):
     dob: Optional[str] = None
     weight: Optional[str] = None
     height: Optional[str] = None
+    latitude: Optional[str] = None
+    longitude: Optional[str] = None
 
 
 async def find_user_by_query(query: dict) -> Optional[User]:

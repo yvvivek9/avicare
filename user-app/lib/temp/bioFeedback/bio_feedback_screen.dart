@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-import '../controller/bio_feedback_controller.dart';
+import 'bio_feedback_controller.dart';
 import 'dart:math' as math;
 
 class BioFeedbackScreen extends StatelessWidget {
@@ -38,7 +38,10 @@ class BioFeedbackScreen extends StatelessWidget {
                         SizedBox(
                           height: double.infinity,
                           width: double.infinity,
-                          child: CameraPreview(controller.cameraController),
+                          child: CameraPreview(
+                            controller.cameraController,
+                            child: controller.customPaint.value,
+                          ),
                         ),
                         Positioned(
                           top: 50.h,
@@ -536,7 +539,7 @@ class BioFeedbackScreen extends StatelessWidget {
               backgroundColor: Colors.black,
             ),
             onPressed: () {
-              Get.to(() => WorkoutCompletionScreen(duration: 30, reps: 47));
+              Get.off(() => WorkoutCompletionScreen(duration: 30, reps: 47));
             },
             child: Text(
               "Finish Workout",

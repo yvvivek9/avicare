@@ -1,7 +1,7 @@
 import 'package:avicare/utils/utils.dart';
 
 class User {
-  User({required this.id, required this.name, required this.email, this.password, this.googleID, this.appleID, this.mobile, this.gender, this.dob, this.weight, this.height});
+  User({required this.id, required this.name, required this.email, this.password, this.googleID, this.appleID, this.mobile, this.gender, this.dob, this.weight, this.height, this.latitude, this.longitude});
 
   String id;
   String name;
@@ -14,6 +14,8 @@ class User {
   String? dob;
   String? weight;
   String? height;
+  String? latitude;
+  String? longitude;
 
   static Future<void> updateUser(User user) async {
     final response = await httpPostRequest(
@@ -39,6 +41,8 @@ class User {
     "dob": dob,
     "weight": weight,
     "height": height,
+    "latitude": latitude,
+    "longitude": longitude,
   };
 
   static User fromJSON(Map<String, dynamic> json) {
@@ -54,6 +58,8 @@ class User {
       dob: json["dob"],
       weight: json["weight"],
       height: json["height"],
+      latitude: json["latitude"],
+      longitude: json["longitude"],
     );
   }
 }

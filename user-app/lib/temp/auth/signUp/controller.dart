@@ -5,7 +5,10 @@ import 'package:country_picker/country_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+import 'package:avicare/temp/homePage/page.dart';
+import 'package:avicare/temp/onBoarding/access_page.dart';
 import 'package:avicare/temp/auth/register/page.dart';
 
 final nameRegEx = RegExp(r"\b([-,a-zA-ZÀ-ÿ. ']+[ ]*)+");
@@ -80,5 +83,23 @@ class SignupController extends GetxController {
       return false;
     }
     return true;
+  }
+
+  Future<void> checkPermissionsAndRedirect() async {
+    final permissions = [
+      Permission.nearbyWifiDevices,
+      Permission.bluetooth,
+      Permission.bluetoothScan,
+      Permission.bluetoothConnect,
+      Permission.location,
+      Permission.camera,
+    ];
+    for (final p in permissions) {
+      if (!await p.status.isGranted) {
+        Get.offAll(() => AccessPage());
+        return;
+      }
+    }
+    Get.offAll(() => MainScreen());
   }
 }

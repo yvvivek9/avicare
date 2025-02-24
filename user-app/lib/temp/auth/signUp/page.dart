@@ -197,9 +197,7 @@ class SignupScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(25.r),
                       ),
                     ),
-                    onPressed: () {
-                      Get.offAll(() => AccessPage());
-                    },
+                    onPressed: controller.checkPermissionsAndRedirect,
                     child: Text(
                       'Continue as guest',
                       style: TextStyle(

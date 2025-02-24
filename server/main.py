@@ -8,6 +8,7 @@ load_dotenv()
 
 from config.auth import validate_api_key
 from routes import router
+from ws_routes.files import ws_router
 
 fastAPI = FastAPI()
 fastAPI.add_middleware(
@@ -18,6 +19,7 @@ fastAPI.add_middleware(
 )
 
 fastAPI.include_router(router, dependencies=[Depends(validate_api_key)])
+fastAPI.include_router(ws_router, prefix="/ws")
 
 @fastAPI.get("/")
 async def index_route():

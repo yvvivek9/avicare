@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:avicare/temp/onBoarding/onboarding_screen_1.dart';
 import 'package:avicare/temp/homePage/page.dart';
+import 'package:avicare/temp/bioFeedback/bio_feedback_screen.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
           home: userSession ? MainScreen() : OnboardingScreen1(),
-          // home: MainScreen(),
+          // home: BioFeedbackScreen(),
         ),
       ),
     );

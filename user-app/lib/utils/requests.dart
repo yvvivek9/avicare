@@ -8,8 +8,9 @@ import 'dart:developer' as developer;
 import 'package:avicare/temp/auth/signIn/page.dart';
 
 const String apiKey = "fnw4ua8bdueu5vckkhg56jaq8xy9m8";
-const String domain = "http://34.100.177.84:5000";
-// const String domain = "http://10.0.2.2:5000";
+const String ipAddress = "34.100.177.84:5000";
+// const String ipAddress = "10.0.2.2:5000";
+// const String ipAddress = "192.168.1.2:5000";
 
 Future<dynamic> httpPostRequest({
   required String route,
@@ -21,7 +22,7 @@ Future<dynamic> httpPostRequest({
     String? token = prefs.getString("token");
 
     final response = await http.post(
-      Uri.parse(domain + route),
+      Uri.parse("http://$ipAddress$route"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'X-API-Key': apiKey,

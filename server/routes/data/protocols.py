@@ -5,7 +5,10 @@ from pydantic import BaseModel
 import repos.exercise as exercise
 import repos.protocol as protocol
 
+from .files import router as files_router
+
 router = APIRouter()
+router.include_router(files_router, prefix="/files")
 
 
 @router.post("/protocol/list")
