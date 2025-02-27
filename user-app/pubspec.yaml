@@ -62,6 +62,10 @@ dependencies:
   web_socket_channel: ^3.0.2
   url_launcher: ^6.3.1
   google_mlkit_pose_detection: ^0.13.0
+  share_plus: ^10.1.4
+  excel: ^4.0.6
+  avatar_plus: ^0.0.5
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

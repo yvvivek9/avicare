@@ -2,6 +2,7 @@ import 'package:avicare_web/screens/widget/action_buttons.dart';
 import 'package:avicare_web/screens/widget/edit_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:avicare_web/models/user.dart';
 
 class CustomerTableItem extends StatelessWidget {
   const CustomerTableItem({
@@ -13,7 +14,7 @@ class CustomerTableItem extends StatelessWidget {
     required this.amountPaid,
     required this.location,
     required this.registeredOn,
-    required this.isEdit,
+    required this.isEdit, required this.onDeleteCallback,
   });
 
   final bool isEdit;
@@ -24,6 +25,7 @@ class CustomerTableItem extends StatelessWidget {
   final String amountPaid;
   final String location;
   final String registeredOn;
+  final Function(String) onDeleteCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +116,11 @@ class CustomerTableItem extends StatelessWidget {
             width: (size * 2).w,
             child: isEdit
                 ? Center(child: EditButtons())
-                : Center(child: ActionButtons(update: "Edit")),
+                : Center(
+                    child: ActionButtons(
+                    update: "Edit",
+                    onDelete: () => onDeleteCallback(customerId),
+                  )),
           ),
         ],
       ),

@@ -25,8 +25,7 @@ class ExercisePageController extends GetxController {
   }
 
   Future<void> handleAddExercise() async {
-    await Get.dialog(NewExerciseDialog());
-    // await showDialog(context: Get.context!, builder: (ctx) => NewExerciseDialog());
+    await showDialog(context: Get.context!, builder: (ctx) => NewExerciseDialog());
     fetchExerciseList();
   }
 

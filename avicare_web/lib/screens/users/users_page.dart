@@ -25,6 +25,17 @@ class UsersPageController extends GetxController {
       showErrorSnackBar(content: "Error fetching user data");
     }
   }
+
+  Future<void> handleUserDelete(String id) async {
+    try {
+      if (!await requestConfirmation(title: "Confirm user deletion", content: "User with id:$id will be deleted")) return;
+      await User.deleteUserById(id);
+      fetchUserData();
+    } catch (e) {
+      safePrint(e);
+      showErrorSnackBar(content: "Error deleting user");
+    }
+  }
 }
 
 class UsersPage extends StatelessWidget {
@@ -66,7 +77,7 @@ class UsersPage extends StatelessWidget {
           ],
         ),
         SizedBox(height: 40.h),
-        CustomerList(usersList: controller.users.value),
+        CustomerList(usersList: controller.users.value, onDeleteCallback: controller.handleUserDelete,),
       ],
     ));
   }

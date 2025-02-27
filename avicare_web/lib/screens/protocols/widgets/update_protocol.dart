@@ -23,11 +23,11 @@ class UpdateProtocolController extends GetxController {
   final exercises = Rx<List<CompactExerciseData>>([]);
   late Protocol protocol;
 
-  @override
-  void onInit() {
-    super.onInit();
-    loadExercises();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   loadExercises();
+  // }
 
   Future<void> loadExercises() async {
     try {
@@ -71,6 +71,7 @@ class UpdateProtocolDialog extends StatelessWidget {
     controller.descriptionController.text = protocol.description;
     controller.imageData.value = base64Decode(protocol.image);
     controller.protocol = protocol;
+    controller.loadExercises();
   }
 
   final Protocol protocol;
@@ -164,7 +165,12 @@ class UpdateProtocolDialog extends StatelessWidget {
                         width: 400.w,
                         height: 200.h,
                         child: controller.imageData.value != null
-                            ? Image.memory(controller.imageData.value!)
+                            ? Row(
+                          children: [
+                            Expanded(child: Image.memory(controller.imageData.value!)),
+                            IconButton(onPressed: () => controller.imageData.value = null, icon: Icon(Icons.close, color: Colors.black))
+                          ],
+                        )
                             : Stack(
                           children: [
                             DropzoneView(

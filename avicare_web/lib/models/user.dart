@@ -22,6 +22,10 @@ class User {
     return List.from(response).map((r) => fromJSON(r)).toList();
   }
 
+  static Future<void> deleteUserById(String id) async {
+    return await httpPostRequest(route: "/admin/user/delete", body: {"user_id": id});
+  }
+
   Map<String, dynamic> toJSON() => {
     "_id": id,
     "name": name,

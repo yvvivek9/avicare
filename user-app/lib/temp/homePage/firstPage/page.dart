@@ -2,7 +2,7 @@ import 'package:avicare/dummy_data/individual_dates_data.dart';
 import 'widget/battery_indicator.dart';
 import 'widget/intro_card.dart';
 import 'widget/protocols.dart';
-import 'package:avicare/screens/widget/build_image.dart';
+import 'package:avatar_plus/avatar_plus.dart';
 import 'package:avicare/screens/widget/individual_dates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,8 +59,19 @@ class HomeScreen2 extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        buildImage(
-                          imagePath: 'https://emojiisland.com/cdn/shop/products/39_large.png?v=1571606117',
+                        FutureBuilder(
+                          future: Future<String>(() async {
+                            final prefs = await SharedPreferences.getInstance();
+                            final name = prefs.getString("dp");
+                            return name ?? "jonny";
+                          }),
+                          initialData: "jonny",
+                          builder: (ctx, data) => AvatarPlus(
+                            data.requireData,
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         SizedBox(
                           width: 10.w,

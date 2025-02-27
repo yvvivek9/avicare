@@ -142,7 +142,12 @@ class UpdateExerciseDialog extends StatelessWidget {
                         width: 400.w,
                         height: 200.h,
                         child: controller.imageData.value != null
-                            ? Image.memory(controller.imageData.value!)
+                            ? Row(
+                          children: [
+                            Expanded(child: Image.memory(controller.imageData.value!)),
+                            IconButton(onPressed: () => controller.imageData.value = null, icon: Icon(Icons.close, color: Colors.black))
+                          ],
+                        )
                             : Stack(
                           children: [
                             DropzoneView(

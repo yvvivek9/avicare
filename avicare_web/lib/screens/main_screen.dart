@@ -98,15 +98,19 @@ class MainScreen extends StatelessWidget {
             vertical: 15.h,
             horizontal: 15.w,
           ),
+          padding: EdgeInsets.symmetric(
+            vertical: 10.h,
+            horizontal: 10.w,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.r),
             color: Colors.grey.shade300,
           ),
           width: 120.w,
-          height: 70.w,
+          height: 72.w,
           child: Center(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(
                   Icons.person,
@@ -119,7 +123,7 @@ class MainScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Darpan Neve",
+                      "Admin",
                       style: TextStyle(
                         fontSize: 24.sp,
                         fontWeight: FontWeight.w300,

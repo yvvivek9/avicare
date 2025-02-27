@@ -8,9 +8,10 @@ import 'customer_table_heading.dart';
 import 'customer_table_item.dart';
 
 class CustomerList extends StatelessWidget {
-  const CustomerList({super.key, required this.usersList});
+  const CustomerList({super.key, required this.usersList, required this.onDeleteCallback});
 
   final List<User> usersList;
+  final Function(String) onDeleteCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +98,7 @@ class CustomerList extends StatelessWidget {
                       location: "--",
                       registeredOn: "--",
                       isEdit: false,
+              onDeleteCallback: onDeleteCallback,
                     ))
                 .toList(),
           ),

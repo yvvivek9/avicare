@@ -9,11 +9,11 @@ class ActionButtons extends StatelessWidget {
   final VoidCallback? onDelete;
 
   const ActionButtons({
-    Key? key,
+    super.key,
     required this.update,
     this.onUpdate,
     this.onDelete,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

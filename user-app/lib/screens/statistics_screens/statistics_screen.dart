@@ -1,19 +1,37 @@
 // statistics_screen.dart
 import 'package:avicare/controller/workout_controller.dart';
-import 'package:avicare/screens/widget/bottom_sheet_button.dart';
-import 'package:avicare/screens/widget/bottom_sheet_icon_button.dart';
-import 'package:avicare/screens/widget/build_text_field.dart';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:excel/excel.dart' as excel;
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:avicare/screens/widget/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class StatisticsScreen extends StatelessWidget {
   final controller = Get.put(WorkoutController());
 
   StatisticsScreen({super.key});
+
+  Future<String> createExcelFile() async {
+    var workbook = excel.Excel.createExcel(); // Create Excel file using alias
+    // var sheet = workbook['Sheet1'];
+    // sheet.appendRow(['Hello', 'World']); // Example content
+
+    List<int>? excelBytes = workbook.encode();
+    if (excelBytes == null) return '';
+
+    Directory directory = await getApplicationDocumentsDirectory();
+    String filePath = '${directory.path}/example.xlsx';
+    File file = File(filePath);
+    await file.writeAsBytes(Uint8List.fromList(excelBytes));
+    return filePath;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +102,14 @@ class StatisticsScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(),
-                    onPressed: () {},
+                    onPressed: () async {
+                      String filePath = await createExcelFile();
+                      if (filePath.isNotEmpty) {
+                        Share.shareXFiles([XFile(filePath)], text: "Here's your Excel file!");
+                      } else {
+                        Fluttertoast.showToast(msg: "Error sharing file, please try again!");
+                      }
+                    },
                     icon: Icon(
                       Icons.ios_share_rounded,
                       color: Colors.black,
