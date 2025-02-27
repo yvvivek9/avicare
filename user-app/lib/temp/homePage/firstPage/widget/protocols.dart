@@ -34,7 +34,7 @@ class Protocols extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               individualProtocolContainer(
-                protocolID: "679be021358bdec41ce0682b",
+                protocolID: "67bfc86a885af9cf433e83d6",
                 color: AppColors.darkPeach,
                 height: 210,
                 width: 164,
@@ -47,7 +47,7 @@ class Protocols extends StatelessWidget {
               Column(
                 children: [
                   individualProtocolContainer(
-                    protocolID: "679be022358bdec41ce0682d",
+                    protocolID: "67bfc889885af9cf433e83df",
                     title: "PCL",
                     description: "10 Exercises",
                     image: "bone.png",
@@ -61,7 +61,7 @@ class Protocols extends StatelessWidget {
                     height: 10.h,
                   ),
                   individualProtocolContainer(
-                    protocolID: "67a1b339cc1bf9c5ce3f0e71",
+                    protocolID: "67bfe2972376f0bacac53a06",
                     title: "Total Knee \nReplacement",
                     description: "15 Exercises",
                     image: 'knee-3.png',
@@ -82,7 +82,7 @@ class Protocols extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               individualProtocolContainer(
-                protocolID: "679be022358bdec41ce0682f",
+                protocolID: "67bfe20b2376f0bacac539f8",
                 title: "Hip \nrehab \nprotocol",
                 description: "12 Exercises",
                 image: "chest.png",
@@ -93,7 +93,7 @@ class Protocols extends StatelessWidget {
                 height: 125,
               ),
               individualProtocolContainer(
-                protocolID: "67a1b1e3cc1bf9c5ce3f0e70",
+                protocolID: "67bfe2502376f0bacac539ff",
                 title: "Ankle rehab \nprotocol",
                 description: "13 Exercises",
                 image: "leg.png",
@@ -109,7 +109,7 @@ class Protocols extends StatelessWidget {
             height: 10.h,
           ),
           individualProtocolContainer(
-            protocolID: "67a1b13ecc1bf9c5ce3f0e6f",
+            protocolID: "67bfe1c42376f0bacac539f1",
             title: "Meniscus repair \nProtocol ",
             description: "10 Exercises",
             image: "knee-2.png",
@@ -142,7 +142,7 @@ Widget individualProtocolContainer({
   return ZoomTapAnimation(
     onTap: () {
       Get.to(() =>
-          ProtocolDetails(protocolName: title));
+          ProtocolDetails(protocolID: protocolID));
     },
     child: Container(
       height: height.h,

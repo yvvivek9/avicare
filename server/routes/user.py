@@ -38,10 +38,11 @@ class LoginEmailRequest(BaseModel):
 @router.post("/login/email")
 async def login_via_email_route(request: LoginEmailRequest) -> LoginResponse:
     result = await user.find_user_by_query({"email": request.email})
-    if result and check_pswd(hashed=result.password, original=request.password):
-        return LoginResponse(token=await sign_jwt(user_id=result.id, user_type="user"))
-    else:
-        raise HTTPException(status_code=400, detail="Invalid credentials")
+    if result is not None and result.password is not None:
+        if check_pswd(hashed=result.password, original=request.password):
+            return LoginResponse(token=await sign_jwt(user_id=result.id, user_type="user"))
+
+    raise HTTPException(status_code=400, detail="Invalid credentials")
 
 class LoginGoogleRequest(BaseModel):
     google_id: str
@@ -57,6 +58,7 @@ async def login_via_google_route(request: LoginGoogleRequest) -> LoginResponse:
             email=request.email,
             google_id=request.google_id,
         ))
+        user_check = await user.find_user_by_query({"email": request.email})
     else:
         if user_check.google_id != request.google_id:
             user_check.google_id = request.google_id

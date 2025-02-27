@@ -12,7 +12,7 @@ class ProtocolDetailsController extends GetxController {
     try {
       Get.context!.loaderOverlay.show();
       final list = await Protocol.listProtocols();
-      final found = list.firstWhereOrNull((e) => e.name == protocolName);
+      final found = list.firstWhereOrNull((e) => e.id == protocolName);
       if (found == null) {
         Get.back();
         Fluttertoast.showToast(msg: "Protocol not found.");

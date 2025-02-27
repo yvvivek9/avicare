@@ -46,18 +46,21 @@ class _ExerciseListTileState extends State<ExerciseListTile> {
     try {
       exercise = await Exercise.fetchExerciseById(widget.exerciseID);
       image = StoredFile.getFileByID(exercise!.image)?.content;
-      setState(() {
-        loaded = true;
-      });
+      if(mounted) {
+        setState(() {
+          loaded = true;
+        });
+      }
     } catch (e) {
+      safePrint(e);
       Fluttertoast.showToast(msg: "Unexpected error occurred");
     }
   }
 
   @override
   void initState() {
-    fetchExercise();
     super.initState();
+    fetchExercise();
   }
 
   @override

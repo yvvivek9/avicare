@@ -12,11 +12,11 @@ import 'controller.dart';
 
 class ProtocolDetails extends StatelessWidget {
   ProtocolDetails(
-      {super.key, required this.protocolName}) {
-    controller.fetchProtocolDetails(protocolName);
+      {super.key, required this.protocolID}) {
+    controller.fetchProtocolDetails(protocolID);
   }
 
-  final String protocolName;
+  final String protocolID;
   final controller = Get.put(ProtocolDetailsController());
 
   @override
@@ -91,7 +91,13 @@ class ProtocolDetails extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            Expanded(child: Obx(() => ExerciseList(exercises: controller.protocol.value.exercises))),
+            Expanded(child: Obx(() {
+              if(controller.protocol.value.id == "") {
+                return Container();
+              } else {
+                return ExerciseList(exercises: controller.protocol.value.exercises);
+              }
+            })),
           ],
         ),
       ),
