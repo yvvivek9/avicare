@@ -8361,10 +8361,10 @@ s=7
 return A.L(A.TU(),$async$em)
 case 7:n=a0
 m=A.d8(J.bk(n.a,"token"))
-i=A.i3("http://13.126.245.254:5000"+b,0,null)
+i=A.i3(b,0,null)
 h=m!=null?"Bearer "+A.n(m):""
 g=t.N
-g=A.aw(["Content-Type","application/json; charset=UTF-8","X-API-Key","fnw4ua8bdueu5vckkhg56jaq8xy9m8","Authorization",h],g,g)
+g=A.aw(["Content-Type","application/json; charset=UTF-8","Access-Control-Allow-Origin","*","X-API-Key","fnw4ua8bdueu5vckkhg56jaq8xy9m8","Authorization",h],g,g)
 s=8
 return A.L(A.b93(i,B.bT.Y3(a,null),g),$async$em)
 case 8:l=a0
