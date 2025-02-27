@@ -7,8 +7,8 @@ import 'dart:convert';
 import 'package:avicare_web/screens/login/page.dart';
 
 const String apiKey = "fnw4ua8bdueu5vckkhg56jaq8xy9m8";
-const String domain = "";
-// const String domain = "http://127.0.0.1:5000";
+// const String domain = "";
+const String domain = "http://127.0.0.1:5000";
 
 Future<dynamic> httpPostRequest({
   required String route,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:avicare_web/screens/widget/multi_select_dropdown.dart';
 import 'package:avicare_web/utils/utils.dart';
 import 'package:avicare_web/models/protocol.dart';
 import 'package:avicare_web/models/exercise.dart';
@@ -20,7 +20,7 @@ class NewProtocolController extends GetxController {
   final imageData = Rx<Uint8List?>(null);
   final borderColor = Rx<Color?>(null);
 
-  final selectedExercises = Rx<List<CompactExerciseData>>([]);
+  List<String> selectedExercises = [];
   final exercises = Rx<List<CompactExerciseData>>([]);
 
   @override
@@ -48,7 +48,7 @@ class NewProtocolController extends GetxController {
           name: nameController.text,
           description: descriptionController.text,
           image: base64Encode(imageData.value!.toList()),
-          exercises: selectedExercises.value.map((e) => e.id).toList(),
+          exercises: selectedExercises,
         ));
         Get.back();
       } catch (e) {
@@ -61,7 +61,6 @@ class NewProtocolController extends GetxController {
     nameController.text = "";
     descriptionController.text = "";
     imageData.value = null;
-    selectedExercises.value = [];
   }
 }
 
@@ -144,11 +143,15 @@ class NewProtocolDialog extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: 4.h),
-                                DropDownMultiSelect(
-                                  options: controller.exercises.value,
-                                  selectedValues: controller.selectedExercises.value,
-                                  onChanged: (values) => controller.selectedExercises.value = values,
+                                MultiSelectDropdown(
+                                  options: controller.exercises.value.map((e) => CustomDropDowns(label: e.name, value: e.id)).toList(),
+                                  onSelectChange: (changes) =>  controller.selectedExercises = changes,
                                 ),
+                                // DropDownMultiSelect(
+                                //   options: controller.exercises.value,
+                                //   selectedValues: controller.selectedExercises.value,
+                                //   onChanged: (values) => controller.selectedExercises.value = values,
+                                // ),
                               ],
                             ),
                           ),

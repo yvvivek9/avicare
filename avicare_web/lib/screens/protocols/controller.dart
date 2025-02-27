@@ -31,6 +31,11 @@ class ProtocolsPageController extends GetxController {
 
   Future<void> handleDeleteProtocol(Protocol protocol) async {
     try {
+      if(mainProtocols.contains(protocol.id)) {
+        showErrorSnackBar(content: "This is a main protocol, hence cant be deleted.");
+        return;
+      }
+
       final confirmation = await requestConfirmation(title: "Confirm deletion", content: "${protocol.name} protocol will be permanently deleted.");
       if (!confirmation) return;
       await Protocol.deleteProtocol(protocol);
@@ -45,3 +50,12 @@ class ProtocolsPageController extends GetxController {
     fetchProtocolList();
   }
 }
+
+const List<String> mainProtocols = [
+  "67bfc86a885af9cf433e83d6",
+  "67bfc889885af9cf433e83df",
+  "67bfe1c42376f0bacac539f1",
+  "67bfe20b2376f0bacac539f8",
+  "67bfe2502376f0bacac539ff",
+  "67bfe2972376f0bacac53a06",
+];

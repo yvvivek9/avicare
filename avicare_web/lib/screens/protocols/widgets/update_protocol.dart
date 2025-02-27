@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:multiselect/multiselect.dart';
+import 'package:avicare_web/screens/widget/multi_select_dropdown.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'dart:typed_data';
@@ -19,7 +19,7 @@ class UpdateProtocolController extends GetxController {
   final imageData = Rx<Uint8List?>(null);
   final borderColor = Rx<Color?>(null);
 
-  final selectedExercises = Rx<List<CompactExerciseData>>([]);
+  List<String> selectedExercises = [];
   final exercises = Rx<List<CompactExerciseData>>([]);
   late Protocol protocol;
 
@@ -32,7 +32,7 @@ class UpdateProtocolController extends GetxController {
   Future<void> loadExercises() async {
     try {
       exercises.value = await CompactExerciseData.list();
-      selectedExercises.value = protocol.exercises.map((e) => exercises.value.firstWhere((t) => t.id == e)).toList();
+      // selectedExercises.value = protocol.exercises.map((e) => exercises.value.firstWhere((t) => t.id == e)).toList();
     } catch (e) {
       showErrorSnackBar(content: e.toString());
     }
@@ -47,7 +47,7 @@ class UpdateProtocolController extends GetxController {
         protocol.name = nameController.text;
         protocol.description = descriptionController.text;
         protocol.image = base64Encode(imageData.value!.toList());
-        protocol.exercises = selectedExercises.value.map((e) => e.id).toList();
+        protocol.exercises = selectedExercises;
 
         await Protocol.updateProtocol(protocol);
         Get.back();
@@ -61,7 +61,6 @@ class UpdateProtocolController extends GetxController {
     nameController.text = "";
     descriptionController.text = "";
     imageData.value = null;
-    selectedExercises.value = [];
   }
 }
 
@@ -151,11 +150,16 @@ class UpdateProtocolDialog extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: 4.h),
-                              DropDownMultiSelect(
-                                options: controller.exercises.value,
-                                selectedValues: controller.selectedExercises.value,
-                                onChanged: (values) => controller.selectedExercises.value = values,
+                              MultiSelectDropdown(
+                                options: controller.exercises.value.map((e) => CustomDropDowns(label: e.name, value: e.id)).toList(),
+                                selectedValues: protocol.exercises,
+                                onSelectChange: (changes) =>  controller.selectedExercises = changes,
                               ),
+                              // DropDownMultiSelect(
+                              //   options: controller.exercises.value,
+                              //   selectedValues: controller.selectedExercises.value,
+                              //   onChanged: (values) => controller.selectedExercises.value = values,
+                              // ),
                             ],
                           ),
                         ),
