@@ -8,7 +8,7 @@ import 'dart:developer' as developer;
 import 'package:avicare/temp/auth/signIn/page.dart';
 
 const String apiKey = "fnw4ua8bdueu5vckkhg56jaq8xy9m8";
-const String ipAddress = "13.126.245.254:5000";
+const String ipAddress = "52.66.134.203:5000";
 // const String ipAddress = "10.0.2.2:5000";
 // const String ipAddress = "192.168.1.2:5000";
 
